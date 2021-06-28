@@ -41,6 +41,13 @@ $router->map('GET', '/', function () {
 });
 
 #MOVIE
+
+$router->map('GET', '/movie/[:slug]', function ($slug) {
+    echo $slug;
+    $controller = new Src\controller\WebsiteController();
+    $controller->movie();
+});
+
 $router->map('GET', '/all-movie', function () {
     $controller = new Src\controller\WebsiteController();
     $controller->allmovie();
@@ -52,33 +59,22 @@ $router->map('GET', '/all-serie', function () {
     $controller->allserie();
 });
 
+$router->map('GET', '/serie/[:slug]', function ($slug) {
+    echo $slug;
+    $controller = new Src\controller\WebsiteController();
+    $controller->allserie();
+});
 #Pages
 
-$router->map('GET', '/about-us', function () {
+$router->map('GET', '/pages/[:slug]', function ($slug) {
+
+    echo $slug;
     $controller = new Src\controller\WebsiteController();
-    $controller->aboutus();
+    $controller->pages();
 });
 
-$router->map('GET', '/corporate-information', function () {
-    $controller = new Src\controller\WebsiteController();
-    $controller->corporateinformation();
-});
 
-$router->map('GET', '/privacy-policy', function () {
-    $controller = new Src\controller\WebsiteController();
-    $controller->privacypolicy();
-});
-
-$router->map('GET', '/terms-and-conditions', function () {
-    $controller = new Src\controller\WebsiteController();
-    $controller->termsandconditions();
-});
-
-$router->map('GET', '/frequently-asked-questions', function () {
-    $controller = new Src\controller\WebsiteController();
-    $controller->faq();
-});
-
+#Contact
 $router->map('GET', '/contact', function () {
     $controller = new Src\controller\WebsiteController();
     $controller->contact();

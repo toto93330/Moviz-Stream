@@ -1,9 +1,27 @@
-/*
-Template: Streamit - Responsive Bootstrap 4 Template
-Author: iqonicthemes.in
-Design and Developed by: iqonicthemes.in
-NOTE: This file contains the styling for responsive Template.
-*/
+/* AJAX SCROLL BOTTOM */
+
+
+if(window.location.pathname == '/all-serie') {
+
+	$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+       alert("LOAD MORE!");
+   }
+});
+
+}
+
+
+if(window.location.pathname == '/all-movie') {
+
+	$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+       alert("LOAD MORE!");
+   }
+});
+
+}
+
 
 /*----------------------------------------------
 Index Of Script

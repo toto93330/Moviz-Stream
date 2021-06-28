@@ -4,18 +4,18 @@
                   <div class="row">
                       <div class="col-lg-3 col-md-4">
                           <ul class="f-link list-unstyled mb-0">
-                              <li><a href="/about-us">About Us</a></li>
+                              <li><a href="/pages/about-us">About Us</a></li>
                               <li><a href="movie-category.html">Movies</a></li>
                               <li><a href="show-category.html">Tv Shows</a></li>
-                              <li><a href="/corporate-information">Coporate Information</a></li>
+                              <li><a href="/pages/corporate-information">Coporate Information</a></li>
                           </ul>
                       </div>
                       <div class="col-lg-3 col-md-4">
                           <ul class="f-link list-unstyled mb-0">
-                              <li><a href="/privacy-policy">Privacy Policy</a></li>
-                              <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                              <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+                              <li><a href="/pages/terms-and-conditions">Terms & Conditions</a></li>
                               <li><a href="/contact">Contact Us</a></li>
-                              <li><a href="/frequently-asked-questions">FAQ</a></li>
+                              <li><a href="/pages/frequently-asked-questions">FAQ</a></li>
                           </ul>
                       </div>
                       <div class="col-lg-3 col-md-12 r-mt-15">
@@ -39,7 +39,7 @@
           </div>
           <div class="copyright py-2">
               <div class="container-fluid">
-                  <p class="mb-0 text-center font-size-14 text-body">moviz-stream.com - 2020 All Rights Reserved</p>
+                  <p class="mb-0 text-center font-size-14 text-body"><?php echo strtolower(_SITETITLE); ?> - <?php echo date("Y"); ?> All Rights Reserved</p>
               </div>
           </div>
       </footer>
@@ -67,7 +67,5 @@
       <!-- Custom JS-->
       <script src="../public/js/custom.js"></script>
       </body>
-
-      <!-- Mirrored from iqonic.design/themes/streamitnew/frontend/html/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Sep 2020 20:04:10 GMT -->
 
       </html>

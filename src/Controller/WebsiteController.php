@@ -2,14 +2,12 @@
 
 namespace Src\Controller;
 
-use Src\Model\Model;
-
 /**
  * This Class it's for front controller.
  * @author Anthony Alves <www.anthonyalves.fr>
  * @package Src\Controller
  */
-class WebsiteController extends Model
+class WebsiteController extends Controller
 {
     //404
     function error404()
@@ -30,6 +28,11 @@ class WebsiteController extends Model
         $this->render('front-office/allmovie', []);
     }
 
+    function movie()
+    {
+        $this->render('front-office/movie', []);
+    }
+
     //SERIE
     function allserie()
     {
@@ -37,55 +40,15 @@ class WebsiteController extends Model
     }
 
 
-    //ABOUT US
-    function aboutus()
+    //pages
+    function pages()
     {
-        $this->render('front-office/aboutus', []);
-    }
-
-    //CORPORATE INFORMATION
-    function corporateinformation()
-    {
-        $this->render('front-office/corporateinformation', []);
-    }
-
-    //PRIVACY POLICY
-    function privacypolicy()
-    {
-        $this->render('front-office/privacypolicy', []);
-    }
-
-    //TERMS & CONDITIONS
-    function termsandconditions()
-    {
-        $this->render('front-office/termsandconditions', []);
-    }
-
-    //FAQ
-    function faq()
-    {
-        $this->render('front-office/faq', []);
+        $this->render('front-office/pages/', []);
     }
 
     //CONTACT
     function contact()
     {
         $this->render('front-office/contact', []);
-    }
-
-
-    // ROUTE RENDER
-    protected function render(string $viewName, array $args)
-    {
-        foreach ($args as $key => $value) {
-            $$key = $value;
-        }
-
-        ob_start();
-        require('../views/' . $viewName . '.html.php');
-        $content = ob_get_clean();
-        require('../views/header.php');
-        require('../views/template.php');
-        require('../views/footer.php');
     }
 }

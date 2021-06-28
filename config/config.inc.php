@@ -6,9 +6,12 @@
  * @link www.anthonyalves.fr
  */
 
-
+// DB
 $host = 'localhost';
-$dbname = 'moviko';
+$dbname = 'moviz-stream';
 $user = 'root';
 $password = '';
 $port = '3306';
+
+// SALT
+$salt = 'test';

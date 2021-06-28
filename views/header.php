@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Moviz-Stream.com</title>
+    <title><?php echo _SITETITLE; ?> | <?php echo _SLOGANT; ?></title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="../public/images/favicon.ico" />
     <!-- Bootstrap CSS -->
@@ -48,7 +48,7 @@
                                             <a href="/">Home</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="/all-serie">Tv Shows</a>
+                                            <a href="/all-serie">Series</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="/all-movie">Movies</a>

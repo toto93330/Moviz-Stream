@@ -124,7 +124,6 @@
                       <div class="col-sm-12 overflow-hidden">
                           <div class="iq-main-header d-flex align-items-center justify-content-between">
                               <h4 class="main-title">Best Seller</h4>
-                              <a href="movie-category.html" class="text-primary">View all</a>
                           </div>
                           <div class="favorites-contens">
                               <ul class="favorites-slider list-inline  row p-0 mb-0">
@@ -284,7 +283,6 @@
                       <div class="col-sm-12 overflow-hidden">
                           <div class="iq-main-header d-flex align-items-center justify-content-between">
                               <h4 class="main-title">New Series</h4>
-                              <a href="movie-category.html" class="text-primary">View all</a>
                           </div>
                           <div class="upcoming-contens">
                               <ul class="favorites-slider list-inline row p-0 mb-0">
@@ -445,7 +443,6 @@
                       <div class="col-sm-12 overflow-hidden">
                           <div class="iq-main-header d-flex align-items-center justify-content-between">
                               <h4 class="main-title">New Movies</h4>
-                              <a href="movie-category.html" class="text-primary">View all</a>
                           </div>
                           <div class="upcoming-contens">
                               <ul class="favorites-slider list-inline row p-0 mb-0">
