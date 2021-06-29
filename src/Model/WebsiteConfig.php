@@ -9,7 +9,6 @@
 namespace App\Model;
 
 use Src\Model\Model;
-use Src\Model\Connexion;
 
 /**
  * This Class it's for general website config.
