@@ -2,6 +2,9 @@
 
 namespace Src\Controller;
 
+use Src\Model\Model;
+use Src\Model\Movie;
+
 /**
  * This Class it's for front controller.
  * @author Anthony Alves <www.anthonyalves.fr>
@@ -9,6 +12,7 @@ namespace Src\Controller;
  */
 class WebsiteController
 {
+
     //404
     function error404()
     {
@@ -18,7 +22,14 @@ class WebsiteController
     //HOME
     function home()
     {
-        $this->render('front-office/home', []);
+        /* GET NEW MOVIE (MAX 6)*/
+        $movie = new Movie();
+        $newMovie = $movie->newMovie(6);
+
+        $this->render('front-office/home', [
+            'newmovie' =>   $newMovie,
+
+        ]);
     }
 
 

@@ -1,7 +1,6 @@
 <?php
 
 /**
- * My first blog coded with another vision, for openclassrooms projet N°5.
  * @copyright Anthony Alves
  * @link www.anthonyalves.fr
  */
@@ -12,7 +11,6 @@ use Src\Model\Model;
 
 /**
  * This Class it's for general website config.
- * he manages everything related to Pages (Add Site title, description, facebook link etc ...)
  * @author Anthony Alves <www.anthonyalves.fr>
  * @package App\Model
  */

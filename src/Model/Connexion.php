@@ -21,11 +21,11 @@ class Connexion
 
         if (empty(self::$instance)) {
 
-            require('../config/config.inc.php');
+            $paramsArray = parse_ini_file("../config/config.inc.ini", true);
 
             try {
 
-                self::$db = new \PDO("mysql:host=" . $host . ';port=' . $port . ';dbname=' . $dbname, $user, $password, array(\PDO::ATTR_PERSISTENT => true));
+                self::$db = new \PDO("mysql:host=" . $paramsArray['db']['host'] . ';port=' . $paramsArray['db']['port'] . ';dbname=' . $paramsArray['db']['dbname'], $paramsArray['db']['user'], $paramsArray['db']['password'], array(\PDO::ATTR_PERSISTENT => true));
                 self::$db->query('SET NAMES utf8');
                 self::$db->query('SET CHARACTER SET utf8');
             } catch (\PDOException $error) {
