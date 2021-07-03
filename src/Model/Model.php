@@ -13,11 +13,12 @@ use Src\Model\Connexion;
 abstract class Model
 {
 
+
     /**
      * Return dbConnect() for connexion with singleton PDO style.
      * @return array
      */
-    protected function dbConnect()
+    static protected function dbConnect()
     {
         return Connexion::dbConnect();
     }
@@ -41,8 +42,26 @@ abstract class Model
             $method = 'set' . ucfirst($key);
             // Si le setter correspondant existe.
             if (method_exists($entity, $method)) {
-                // On appelle le setter.
-                $entity->$method($value);
+                // et si il detect que le setter dois contenir un object
+                if (\preg_match('#id$#', $method)) {
+
+                    $list = null;
+                    $table = substr($key, 0, -2);
+                    $stmt = $this->dbConnect()->prepare("SELECT * FROM $table WHERE id = $value");
+                    $stmt->execute();
+                    $items = $stmt->fetchall();
+
+                    foreach ($items as $articleRaw) {
+                        $list[] = $this->getInstance($articleRaw, '\Src\Entity\Entity' . $table);
+                    }
+
+                    $method = 'set' . ucfirst($key);
+
+                    $entity->$method($list[0]);
+                } else {
+                    // On appelle le setter.
+                    $entity->$method($value);
+                }
             }
         }
 
@@ -57,6 +76,19 @@ abstract class Model
     public function findAll()
     {
         $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table");
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Find All video for header hero
+     *
+     * @return void
+     */
+    public function headerhero()
+    {
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table headerhero = 1");
         $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -133,7 +165,7 @@ abstract class Model
     }
 
     /**
-     * encrypte password with defined salt in "config/config.inc.ini".
+     * encrypte password with defined salt defined in "config/config.inc.ini".
      * @param string $password
      */
     function encryptPassword($password)
@@ -141,5 +173,46 @@ abstract class Model
         $paramsArray = parse_ini_file("../config/config.inc.ini", true);
         $salt = $paramsArray['salt']['salt'];
         $this->encryptPassword = md5($password . $salt);
+    }
+
+    /**
+     * slugify text.
+     * @param string $password
+     */
+    public static function slugify($text, string $divider = '-')
+    {
+        // replace non letter or digits by divider
+        $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, $divider);
+
+        // remove duplicate divider
+        $text = preg_replace('~-+~', $divider, $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
+    }
+
+
+    public static function dataExist($data, string $message)
+    {
+
+        if (empty($data)) {
+            $_SESSION['error'] = $message;
+            return header('Location: /');
+        }
     }
 }

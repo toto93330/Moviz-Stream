@@ -102,8 +102,10 @@ header .navbar ul li:last-child { margin-right: 0; }
 .favorites-slider .slick-list, #top-ten-slider-nav .slick-list { overflow: visible; padding-bottom: 40px !important; }
 .favorites-slider li.slide-item { float: left; width: 25%; }
 .favorites-slider .slick-list { overflow: visible; }
+.block-images {height: 227px;}
+
 li.slide-item { position: relative; padding: 0 15px; }
-li.slide-item .block-images {position: relative; width: 100%;transition: all 0.45s ease 0s; overflow: hidden;-webkit-backface-visibility: hidden; backface-visibility: hidden;-webkit-transform: translate3d(0, 0, 0);
+li.slide-item .block-images {position: relative; width: 100%; transition: all 0.45s ease 0s; overflow: hidden;-webkit-backface-visibility: hidden; backface-visibility: hidden;-webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);transition: all 0.6s ease 0s; -webkit-transition: all 0.6s ease 0s; -moz-transition: all 0.6s ease 0s; -o-transition: all 0.6s ease 0s;}
 li.slide-item:hover .block-images { overflow: visible; }
 li.slide-item:hover .block-images .img-box{position:relative;}

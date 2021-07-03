@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en-US">
 
 <head>
@@ -87,33 +88,18 @@
                                                 <div class="iq-sub-dropdown">
                                                     <div class="iq-card shadow-none m-0">
                                                         <div class="iq-card-body">
-                                                            <a href="#" class="iq-sub-card">
-                                                                <div class="media align-items-center">
-                                                                    <img src="../public/images/notify/thumb-1.jpg" class="img-fluid mr-3" alt="streamit" />
-                                                                    <div class="media-body">
-                                                                        <h6 class="mb-0 ">Boop Bitty</h6>
-                                                                        <small class="font-size-12"> just now</small>
+                                                            
+                                                            {% for news in constant('_HEADERNEWS') %}
+                                                                <a href="/movie/{{ news.slug }}" class="iq-sub-card">
+                                                                    <div class="media align-items-center">
+                                                                        <img src="{{ news.image }}" class="img-fluid mr-3" alt="streamit" />
+                                                                        <div class="media-body">
+                                                                            <h6 class="mb-0 ">{{ news.name }}</h6>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="#" class="iq-sub-card">
-                                                                <div class="media align-items-center">
-                                                                    <img src="../public/images/notify/thumb-2.jpg" class="img-fluid mr-3" alt="streamit" />
-                                                                    <div class="media-body">
-                                                                        <h6 class="mb-0 ">The Last Breath</h6>
-                                                                        <small class="font-size-12">15 minutes ago</small>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a href="#" class="iq-sub-card">
-                                                                <div class="media align-items-center">
-                                                                    <img src="../public/images/notify/thumb-3.jpg" class="img-fluid mr-3" alt="streamit" />
-                                                                    <div class="media-body">
-                                                                        <h6 class="mb-0 ">The Hero Camp</h6>
-                                                                        <small class="font-size-12">1 hour ago</small>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
+                                                                </a>
+                                                            {% endfor %}
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -149,33 +135,21 @@
                                         <div class="iq-sub-dropdown">
                                             <div class="iq-card shadow-none m-0">
                                                 <div class="iq-card-body">
-                                                    <a href="#" class="iq-sub-card">
+
+                                                    {% for news in constant('_HEADERNEWS') %}
+                                                                <a href="/movie/{{ news.slug }}" class="iq-sub-card">
                                                         <div class="media align-items-center">
-                                                            <img src="../public/images/notify/thumb-1.jpg" class="img-fluid mr-3" alt="streamit" />
+                                                            <img src="{{ news.image }}" class="img-fluid mr-3" alt="streamit" style="width: 125px;" />
                                                             <div class="media-body">
-                                                                <h6 class="mb-0 ">Boot Bitty</h6>
-                                                                <small class="font-size-12"> just now</small>
+                                                                <h6 class="mb-0 ">{{ news.name }}</h6>
+                                                                <small class="font-size-12"> is new</small>
                                                             </div>
                                                         </div>
                                                     </a>
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center">
-                                                            <img src="../public/images/notify/thumb-2.jpg" class="img-fluid mr-3" alt="streamit" />
-                                                            <div class="media-body">
-                                                                <h6 class="mb-0 ">The Last Breath</h6>
-                                                                <small class="font-size-12">15 minutes ago</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center">
-                                                            <img src="../public/images/notify/thumb-3.jpg" class="img-fluid mr-3" alt="streamit" />
-                                                            <div class="media-body">
-                                                                <h6 class="mb-0 ">The Hero Camp</h6>
-                                                                <small class="font-size-12">1 hour ago</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
+                                                    {% endfor %}
+                                                            
+                                                            
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -240,6 +214,8 @@
             </div>
         </div>
     </footer>
+
+
     <!-- MainContent End-->
     <!-- back-to-top -->
     <div id="back-to-top">

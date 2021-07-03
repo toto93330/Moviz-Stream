@@ -3,26 +3,24 @@
 namespace Src\Entity;
 
 /**
- * Entity Movie This Class it's for entity hydrate.
+ * Entity Views This Class it's for entity hydrate.
  * @copyright Anthony Alves
  * @link www.anthonyalves.fr
  */
-class EntityMovie
-{
 
+class EntitySerie
+{
     protected $id;
     protected $name;
     protected $link;
     protected $slug;
     protected $yearofcreated;
-    protected $time;
-    protected $ageadapt;
     protected $content;
     protected $bestseller;
     protected $headerhero;
     protected $categoryid;
-    protected $viewsid;
-    protected $likesid;
+    protected $likeid;
+    protected $saisonid;
     protected $image;
 
 
@@ -31,7 +29,7 @@ class EntityMovie
     /////
 
     /**
-     * Return movie id
+     * Return serie id
      *
      * @return int
      */
@@ -42,7 +40,7 @@ class EntityMovie
     }
 
     /**
-     * Return movie name
+     * Return serie name
      *
      * @return string
      */
@@ -53,7 +51,7 @@ class EntityMovie
     }
 
     /**
-     * Return link of movie
+     * Return link of serie
      *
      * @return string
      */
@@ -64,7 +62,7 @@ class EntityMovie
     }
 
     /**
-     * Return movie slug
+     * Return serie slug
      *
      * @return string
      */
@@ -75,40 +73,18 @@ class EntityMovie
     }
 
     /**
-     * Return Year of created movie
+     * Return Year of created serie
      *
      * @return string
      */
     function getYearofcreated()
     {
 
-        return $this->yearofcreated;
+        return $this->yearorcreated;
     }
 
     /**
-     * Return movie time
-     *
-     * @return string
-     */
-    function getTime()
-    {
-
-        return $this->time;
-    }
-
-    /**
-     * Return movie time
-     *
-     * @return string
-     */
-    function getAgeadapt()
-    {
-
-        return $this->ageadapt;
-    }
-
-    /**
-     * Return a little Synopsis for movie
+     * Return a little Synopsis for serie
      *
      * @return string
      */
@@ -119,7 +95,7 @@ class EntityMovie
     }
 
     /**
-     * Return a boolean for movie if in best seller or not
+     * Return a boolean for serie if in best seller or not
      *
      * @return bool
      */
@@ -130,7 +106,7 @@ class EntityMovie
     }
 
     /**
-     * Return a boolean for movie is in Header Hero on index or not
+     * Return a boolean for serie is in Header Hero on index or not
      *
      * @return bool
      */
@@ -141,7 +117,7 @@ class EntityMovie
     }
 
     /**
-     * Return category of movie
+     * Return category of serie
      *
      * @return array
      */
@@ -152,29 +128,29 @@ class EntityMovie
     }
 
     /**
-     * Return total number of views of a movie
+     * Return saison
      *
      * @return array
      */
-    function getViewsid()
+    function getSaisonid()
     {
 
-        return $this->viewsid;
+        return $this->viewid;
     }
 
     /**
-     * Return total number of likes of a movie
+     * Return total number of likes of a serie
      *
      * @return array
      */
-    function getLikesid()
+    function getLikeid()
     {
 
-        return $this->likesid;
+        return $this->likeid;
     }
 
     /**
-     * Return image of a movie
+     * Return image of a serie
      *
      * @return string
      */
@@ -189,7 +165,7 @@ class EntityMovie
     /////
 
     /**
-     * Set movie id
+     * Set serie id
      *
      * @param int
      * @return void
@@ -201,7 +177,7 @@ class EntityMovie
     }
 
     /**
-     * Set movie name
+     * Set serie name
      *
      * @param string
      * @return void
@@ -213,7 +189,7 @@ class EntityMovie
     }
 
     /**
-     * Set movie link
+     * Set serie link
      *
      * @param string
      * @return void
@@ -225,7 +201,7 @@ class EntityMovie
     }
 
     /**
-     * Set movie id
+     * Set serie id
      *
      * @param string
      * @return void
@@ -237,43 +213,19 @@ class EntityMovie
     }
 
     /**
-     * Set movie Year
+     * Set serie Year
      *
      * @param string
      * @return void
      */
-    function setYearofcreated($yearofcreated)
+    function setYearofcreated($yearorcreated)
     {
 
-        $this->yearofcreated = $yearofcreated;
+        $this->yearorcreated = $yearorcreated;
     }
 
     /**
-     * Set movie time
-     *
-     * @param string
-     * @return void
-     */
-    function setTime($time)
-    {
-
-        $this->time = $time;
-    }
-
-    /**
-     * Set movie time
-     *
-     * @param string
-     * @return void
-     */
-    function setAgeadapt($ageadapt)
-    {
-
-        $this->ageadapt = $ageadapt;
-    }
-
-    /**
-     * Set movie Synopsis
+     * Set serie Synopsis
      *
      * @param string
      * @return void
@@ -285,7 +237,7 @@ class EntityMovie
     }
 
     /**
-     * Set movie is in bestseller or not
+     * Set serie is in bestseller or not
      *
      * @param bool
      * @return void
@@ -297,7 +249,7 @@ class EntityMovie
     }
 
     /**
-     * Set movie is in headerhoro on a index or not
+     * Set serie is in headerhoro on a index or not
      *
      * @param bool
      * @return void
@@ -309,7 +261,7 @@ class EntityMovie
     }
 
     /**
-     * Set movie categoryid
+     * Set serie categoryid
      *
      * @param array
      * @return void
@@ -321,31 +273,31 @@ class EntityMovie
     }
 
     /**
-     * Set movie viewid
+     * Set saisonid
      *
      * @param array
      * @return void
      */
-    function setViewsID($viewsid)
+    function setSaisonID($saisonid)
     {
 
-        $this->viewsid = $viewsid;
+        $this->saisonid = $saisonid;
     }
 
     /**
-     * Set movie likeid
+     * Set serie likeid
      *
      * @param array
      * @return void
      */
-    function setLikesID($likesid)
+    function setLikeID($likeid)
     {
 
-        $this->likesid = $likesid;
+        $this->likeid = $likeid;
     }
 
     /**
-     * Set movie image
+     * Set serie image
      *
      * @param string
      * @return void
