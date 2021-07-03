@@ -1,13 +1,11 @@
 <?php
 
 /**
- * @copyright Anthony Alves
+ * @copyright Anthony Alves 
  * @link www.anthonyalves.fr
  */
 
 namespace Src\Model;
-
-use Src\Entity\EntityMovie;
 
 /**
  * This Class it's for Video.
@@ -25,8 +23,6 @@ class Movie extends Model
     {
         $this->table = 'movie';
     }
-
-
 
     /**
      * Return all movie.
@@ -49,9 +45,30 @@ class Movie extends Model
         return $list;
     }
 
+    /**
+     * Return most liked movie.
+     * 
+     * @return mixed
+     */
+    public function mostlikedMovie($numberofmovie)
+    {
+        $list = [];
+
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table ORDER BY likes DESC LIMIT $numberofmovie");
+        $stmt->execute();
+
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $articleRaw) {
+            $list[] = $this->getInstance($articleRaw, new \Src\Entity\EntityMovie());
+        }
+
+        return $list;
+    }
+
 
     /**
-     * Return video by slug.
+     * Return video for news.
      * 
      * @return mixed
      */
@@ -60,8 +77,7 @@ class Movie extends Model
 
         $list = [];
 
-        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table where 'slug' = ?");
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE slug = ?");
         $stmt->execute([$slug]);
         $items = $stmt->fetchAll();
 

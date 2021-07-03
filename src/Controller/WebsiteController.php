@@ -26,6 +26,8 @@ class WebsiteController
         $movie = new Movie();
         $newMovie = $movie->newMovie(6);
 
+        \var_dump($newMovie);
+
         $this->render('front-office/home', [
             'newmovie' =>   $newMovie,
 
@@ -39,9 +41,24 @@ class WebsiteController
         $this->render('front-office/allmovie', []);
     }
 
-    function movie()
+    function movie($slug)
     {
-        $this->render('front-office/movie', []);
+        // Tranform non formated Slug
+        $slug = Model::slugify($slug);
+        // Take movie by slug
+        $movie = (new Movie)->Movie($slug);
+        // Take new movies
+        $newmovies = (new Movie)->newMovie(10);
+        // Take most liked movie
+        $mostlikedmovies = (new Movie)->mostlikedMovie(10);
+
+
+
+        $this->render('front-office/movie', [
+            'movie' => $movie[0],
+            'newmovies' => $newmovies,
+            'mostlikedmovies' => $mostlikedmovies
+        ]);
     }
 
     //SERIE
@@ -67,25 +84,15 @@ class WebsiteController
     // ROUTE RENDER
     protected function render(string $viewName, array $args)
     {
-        foreach ($args as $key => $value) {
-            $$key = $value;
-        }
-
-        // ob_start();
-
-        // require('../views/' . $viewName . '.html.php');
-        // $content = ob_get_clean();
-
-        // \var_dump($content);
-        // require('../views/template.php');
 
 
         $loader = new \Twig\Loader\FilesystemLoader('../views/front-office');
         $twig = new \Twig\Environment($loader, [
-            'cache' => '../cache',
+            'cache' => false,
         ]);
 
+        $twig->addGlobal('session', $_SESSION);
         $folder = explode('/', $viewName);
-        echo $twig->render($folder[1] . '.html.twig', [$args]);
+        echo $twig->render($folder[1] . '.html.twig', $args);
     }
 }

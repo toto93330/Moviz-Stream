@@ -1,25 +1,35 @@
 <?php
 
+use Src\Model\WebsiteConfig;
+
+
 /**
  * Moviko Redux.
  * @copyright Anthony Alves
  * @link www.anthonyalves.fr
  */
 
+
+
 ####
 # SESSION
 ####
 session_start();
 
+###
 # AUTOLOAD
+###
 require '../vendor/autoload.php';
 
 ####
 # INIT WEBSITE
 ####
-require('../src/Model/WebsiteConfig.php');
-$setting = new \App\Model\WebsiteConfig();
-$setting->WebsiteConfig();
+WebsiteConfig::websiteConfig();
+
+####
+# INIT HEADER NEWS
+####
+WebsiteConfig::websiteNews();
 
 # INIT ROUTE
 $router = new AltoRouter();

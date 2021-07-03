@@ -43,9 +43,8 @@ $router->map('GET', '/', function () {
 #MOVIE
 
 $router->map('GET', '/movie/[:slug]', function ($slug) {
-    echo $slug;
     $controller = new Src\controller\WebsiteController();
-    $controller->movie();
+    $controller->movie($slug);
 });
 
 $router->map('GET', '/all-movie', function () {
