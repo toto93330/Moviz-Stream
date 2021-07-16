@@ -18,6 +18,7 @@ class EntityMovie
     protected $time;
     protected $ageadapt;
     protected $content;
+    protected $trailer;
     protected $bestseller;
     protected $headerhero;
     protected $categoryid;
@@ -182,6 +183,17 @@ class EntityMovie
     {
 
         return $this->image;
+    }
+
+    /**
+     * Return trailer
+     *
+     * @return string
+     */
+    function getTrailer()
+    {
+
+        return $this->trailer;
     }
 
     /////
@@ -354,5 +366,17 @@ class EntityMovie
     {
 
         $this->image = $image;
+    }
+
+    /**
+     * Set Trailer link
+     *
+     * @param string
+     * @return void
+     */
+    function setTrailer($trailer)
+    {
+
+        $this->trailer = $trailer;
     }
 }

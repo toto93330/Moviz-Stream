@@ -7,7 +7,7 @@
 
 namespace Src\Model;
 
-use Src\Entity\EntityMovie;
+use Src\Entity\EntitySerie;
 
 /**
  * This Class it's for Video.
@@ -15,7 +15,7 @@ use Src\Entity\EntityMovie;
  * @author Anthony Alves <www.anthonyalves.fr>
  * @package App\Model
  */
-class Movie extends Model
+class Serie extends Model
 {
 
     protected $table;
@@ -23,7 +23,7 @@ class Movie extends Model
 
     function __construct()
     {
-        $this->entity = new EntityMovie();
-        $this->table = 'movie';
+        $this->entity = new EntitySerie();
+        $this->table = 'serie';
     }
 }

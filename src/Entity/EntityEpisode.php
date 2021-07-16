@@ -8,18 +8,15 @@ namespace Src\Entity;
  * @link www.anthonyalves.fr
  */
 
-class EntitySerie
+class EntityEpisode
 {
     protected $id;
     protected $name;
     protected $slug;
-    protected $yearofcreated;
+    protected $link;
     protected $content;
-    protected $trailer;
-    protected $bestseller;
-    protected $headerhero;
-    protected $categoryid;
-    protected $likeid;
+    protected $serieid;
+    protected $saisonid;
     protected $image;
 
 
@@ -61,14 +58,14 @@ class EntitySerie
     }
 
     /**
-     * Return Year of created serie
+     * Return serie link
      *
      * @return string
      */
-    function getYearofcreated()
+    function getLink()
     {
 
-        return $this->yearorcreated;
+        return $this->link;
     }
 
     /**
@@ -83,47 +80,26 @@ class EntitySerie
     }
 
     /**
-     * Return a boolean for serie if in best seller or not
-     *
-     * @return bool
-     */
-    function getBestseller()
-    {
-
-        return $this->bestseller;
-    }
-
-    /**
-     * Return a boolean for serie is in Header Hero on index or not
-     *
-     * @return bool
-     */
-    function getHeaderhero()
-    {
-
-        return $this->headerhero;
-    }
-
-    /**
-     * Return category of serie
+     * Return saison
      *
      * @return array
      */
-    function getCategoryid()
+    function getSerieid()
     {
 
-        return $this->categoryid;
+        return $this->serieid;
     }
 
+
     /**
-     * Return total number of likes of a serie
+     * Return saison
      *
      * @return array
      */
-    function getLikeid()
+    function getSaisonid()
     {
 
-        return $this->likeid;
+        return $this->viewid;
     }
 
     /**
@@ -137,16 +113,7 @@ class EntitySerie
         return $this->image;
     }
 
-    /**
-     * Return trailer
-     *
-     * @return string
-     */
-    function getTrailer()
-    {
 
-        return $this->trailer;
-    }
 
     /////
     // SETTER
@@ -189,15 +156,15 @@ class EntitySerie
     }
 
     /**
-     * Set serie Year
+     * Return serie link
      *
      * @param string
      * @return void
      */
-    function setYearofcreated($yearorcreated)
+    function setLink($link)
     {
 
-        $this->yearorcreated = $yearorcreated;
+        $this->link = $link;
     }
 
     /**
@@ -213,52 +180,29 @@ class EntitySerie
     }
 
     /**
-     * Set serie is in bestseller or not
-     *
-     * @param bool
-     * @return void
-     */
-    function setBestseller($bestseller)
-    {
-
-        $this->bestseller = $bestseller;
-    }
-
-    /**
-     * Set serie is in headerhoro on a index or not
-     *
-     * @param bool
-     * @return void
-     */
-    function setHeaderhero($headerhero)
-    {
-
-        $this->headerhero = $headerhero;
-    }
-
-    /**
-     * Set serie categoryid
+     * Set serie id
      *
      * @param array
      * @return void
      */
-    function setCategoryID($categoryid)
+    function setSerieID($serieid)
     {
 
-        $this->categoryid = $categoryid;
+        $this->serieid = $serieid;
     }
 
     /**
-     * Set serie likeid
+     * Set saisonid
      *
      * @param array
      * @return void
      */
-    function setLikeID($likeid)
+    function setSaisonID($saisonid)
     {
 
-        $this->likeid = $likeid;
+        $this->saisonid = $saisonid;
     }
+
 
     /**
      * Set serie image
@@ -270,17 +214,5 @@ class EntitySerie
     {
 
         $this->image = $image;
-    }
-
-    /**
-     * Set Trailer link
-     *
-     * @param string
-     * @return void
-     */
-    function setTrailer($trailer)
-    {
-
-        $this->trailer = $trailer;
     }
 }

@@ -30,9 +30,18 @@ class EntityLikes
 
     /**
      * Get number of likes
-     * @return object 
+     * @return int 
      */
-    function getlikes()
+    function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * Get is serie or not
+     * @return int 
+     */
+    function getIsserie()
     {
         return $this->likes;
     }
@@ -53,12 +62,24 @@ class EntityLikes
     }
 
     /**
-     * Set likes id
+     * Set number of likes
      *
      * @param int $likes
      * @return void
      */
-    function setlikes($likes)
+    function setLikes($likes)
+    {
+        $this->likes = $likes;
+    }
+
+
+    /**
+     * Set is serie or not
+     *
+     * @param int $likes
+     * @return void
+     */
+    function setIsserie($likes)
     {
         $this->likes = $likes;
     }

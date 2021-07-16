@@ -22,14 +22,13 @@ class WebsiteController
     //HOME
     function home()
     {
-        /* GET NEW MOVIE (MAX 6)*/
-        $movie = new Movie();
-        $newMovie = $movie->newMovie(6);
+        /* GET NEW MOVIES */
+        $newMovies = (new Movie())->findMediasByDescAndLimit(10);
+        /* GET NEW SERIES */
 
-        \var_dump($newMovie);
 
         $this->render('front-office/home', [
-            'newmovie' =>   $newMovie,
+            'newmovies' =>   $newMovies,
 
         ]);
     }

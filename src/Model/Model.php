@@ -2,7 +2,7 @@
 
 namespace Src\Model;
 
-use Src\Model\Connexion;
+use Src\Functions\Connexion;
 
 /**
  * This Class is here for defined direction for all model and this class is abstract.
@@ -12,6 +12,9 @@ use Src\Model\Connexion;
 
 abstract class Model
 {
+
+    protected $table;
+    protected $entity;
 
 
     /**
@@ -81,6 +84,74 @@ abstract class Model
         return $stmt->fetchAll();
     }
 
+
+
+    /**
+     * Find all Medias by DESC AND LIMIT.
+     * 
+     * @return mixed
+     */
+    public function findMediasByDescAndLimit($numberofmedias)
+    {
+        $list = [];
+
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table ORDER BY id DESC LIMIT $numberofmedias");
+        $stmt->execute();
+
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $articleRaw) {
+            $list[] = $this->getInstance($articleRaw, $this->entity);
+        }
+
+        return $list;
+    }
+
+    /**
+     * Return most liked medias.
+     * 
+     * @return mixed
+     */
+    public function findMostLikedMedias($numberofmedias)
+    {
+        $list = [];
+
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table ORDER BY likes DESC LIMIT $numberofmedias");
+        $stmt->execute();
+
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $articleRaw) {
+            $list[] = $this->getInstance($articleRaw, $this->entity);
+        }
+
+        return $list;
+    }
+
+
+    /**
+     * Return video for news.
+     * 
+     * @return mixed
+     */
+    public function findMediasBySlug($slug)
+    {
+
+        $list = [];
+
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE slug = ?");
+        $stmt->execute([$slug]);
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $articleRaw) {
+            $list[] = $this->getInstance($articleRaw, $this->entity);
+        }
+
+        return $list;
+    }
+
+
+
     /**
      * Find All video for header hero
      *
@@ -144,6 +215,19 @@ abstract class Model
     {
 
         $query = $this->dbConnect()->prepare("DELETE FROM $this->table WHERE `id` = $id");
+        $query->execute();
+    }
+
+
+    /**
+     * find best-seller (order by desc max 6)
+     *       
+     * @param int $id
+     */
+    function findBestSeller()
+    {
+
+        $query = $this->dbConnect()->prepare("SELECT * FROM likes ORDER BY DESC 0,6");
         $query->execute();
     }
 

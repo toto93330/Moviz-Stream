@@ -1,15 +1,12 @@
 <?php
 
-use Src\Model\WebsiteConfig;
-
+use Src\Functions\WebsiteConfig;
 
 /**
  * Moviko Redux.
  * @copyright Anthony Alves
  * @link www.anthonyalves.fr
  */
-
-
 
 ####
 # SESSION
@@ -19,7 +16,7 @@ session_start();
 ###
 # AUTOLOAD
 ###
-require '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 ####
 # INIT WEBSITE
@@ -31,9 +28,16 @@ WebsiteConfig::websiteConfig();
 ####
 WebsiteConfig::websiteNews();
 
+####
+# INIT LANGUAGE
+####
+WebsiteConfig::websiteLanguage();
+
+####
 # INIT ROUTE
+####
 $router = new AltoRouter();
-require '../config/routes.php';
+require_once '../config/routes.php';
 
 # call closure or throw 404 status CALL CLOSURE OR THROW 404 STATUS
 $match = $router->match();

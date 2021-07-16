@@ -1,11 +1,13 @@
 <?php
 
-namespace Src\Model;
+namespace Src\Functions;
+
+use Src\Functions\WebsiteConfig;
 
 /**
  * This Class it's for connexion with PDO.
  * @author Anthony Alves <www.anthonyalves.fr>
- * @package App\Model
+ * @package App\Functions
  */
 class Connexion
 {
