@@ -12,7 +12,7 @@
                               <div class="col-xl-6 col-lg-12 col-md-12">
                                   <a href="javascript:void(0);">
                                       <div class="channel-logo" data-animation-in="fadeInLeft" data-delay-in="0.5">
-                                          <img src="../public/images/logo.png" class="c-logo" alt="streamit">
+                                          <img src="images/logo.png" class="c-logo" alt="streamit">
                                       </div>
                                   </a>
                                   <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft" data-delay-in="0.6">bushland</h1>
@@ -31,7 +31,7 @@
                           </div>
                           
                           <div class="trailor-video">
-                              <a href="../../public/uploads/trailers/trailer.mp4" class="video-open playbtn">
+                              <a href="uploads/trailers/trailer.mp4" class="video-open playbtn">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7" xml:space="preserve">
                                       <polygon class='triangle' fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="73.5,62.5 148.5,105.8 73.5,149.1 " />
                                       <circle class='circle' fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
@@ -49,7 +49,7 @@
                               <div class="col-xl-6 col-lg-12 col-md-12">
                                   <a href="javascript:void(0);">
                                       <div class="channel-logo" data-animation-in="fadeInLeft">
-                                          <img src="../public/images/logo.png" class="c-logo" alt="streamit">
+                                          <img src="images/logo.png" class="c-logo" alt="streamit">
                                       </div>
                                   </a>
                                   <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft">sail coaster</h1>
@@ -67,7 +67,7 @@
                               </div>
                           </div>
                           <div class="trailor-video">
-                              <a href="../../public/uploads/trailers/trailer.mp4" class="video-open playbtn">
+                              <a href="uploads/trailers/trailer.mp4" class="video-open playbtn">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7" xml:space="preserve">
                                       <polygon class='triangle' fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="73.5,62.5 148.5,105.8 73.5,149.1 " />
                                       <circle class='circle' fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
@@ -85,7 +85,7 @@
                               <div class="col-xl-6 col-lg-12 col-md-12">
                                   <a href="javascript:void(0);">
                                       <div class="channel-logo" data-animation-in="fadeInLeft">
-                                          <img src="../public/images/logo.png" class="c-logo" alt="streamit">
+                                          <img src="images/logo.png" class="c-logo" alt="streamit">
                                       </div>
                                   </a>
                                   <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft">the army</h1>
@@ -103,7 +103,7 @@
                               </div>
                           </div>
                           <div class="trailor-video">
-                              <a href="../../public/uploads/trailers/trailer.mp4" class="video-open playbtn">
+                              <a href="uploads/trailers/trailer.mp4" class="video-open playbtn">
                                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7" xml:space="preserve">
                                       <polygon class='triangle' fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="73.5,62.5 148.5,105.8 73.5,149.1 " />
                                       <circle class='circle' fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
@@ -133,17 +133,23 @@
                           </div>
                           <div class="favorites-contens">
                               <ul class="favorites-slider list-inline  row p-0 mb-0">
+                                {% if (bestsellermovies == null) or (bestsellermovies == null) %}
+                                <div class="d-flex align-items-center">
+                                    <h5 class="text-danger">Pas de medias pour le moments</h5>
+                                </div>
+                                {% endif %}
+                                {% for bestsellermovie in bestsellermovies %}
                                   <li class="slide-item">
-                                      <a href="movie-details.html">
+                                      <a href="/movie/{{bestsellermovie.slug}}">
                                           <div class="block-images position-relative">
                                               <div class="img-box">
-                                                  <img src="../public/images/favorite/01.jpg" class="img-fluid" alt="">
+                                                  <img src="{{bestsellermovie.image}}" class="img-fluid" alt="">
                                               </div>
                                               <div class="block-description">
-                                                  <h6>Champions</h6>
+                                                  <h6>{{bestsellermovie.name}}</h6>
                                                   <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">13+</div>
-                                                      <span class="text-white">2h 30m</span>
+                                                      <div class="badge badge-secondary p-1 mr-2">{{bestsellermovie.ageadapt}}+</div>
+                                                      <span class="text-white">{{bestsellermovie.time}}</span>
                                                   </div>
                                                   <div class="hover-buttons">
                                                       <span class="btn btn-hover">
@@ -154,7 +160,6 @@
                                               </div>
                                               <div class="block-social-info">
                                                   <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
                                                       <li><span><i class="ri-heart-fill"></i></span></li>
                                                       <li><span><i class="ri-add-line"></i></span></li>
                                                   </ul>
@@ -162,45 +167,20 @@
                                           </div>
                                       </a>
                                   </li>
+                                {% endfor %}
+
+
+                                {% for bestsellerserie in bestsellerseries %}
                                   <li class="slide-item">
-                                      <a href="show-details.html">
+                                      <a href="/serie/{{bestsellerserie.id}}/1/{{bestsellerserie.slug}}">
                                           <div class="block-images position-relative">
                                               <div class="img-box">
-                                                  <img src="../public/images/favorite/02.jpg" class="img-fluid" alt="">
+                                                  <img src="{{bestsellerserie.image}}" class="img-fluid" alt="">
                                               </div>
                                               <div class="block-description">
-                                                  <h6>Last Race</h6>
+                                                  <h6>{{bestsellerserie.name}}</h6>
                                                   <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">7+</div>
-                                                      <span class="text-white">2 Seasons</span>
-                                                  </div>
-                                                  <div class="hover-buttons">
-                                                      <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                          {{ constant('_PLAYNOW') }}
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                              <div class="block-social-info">
-                                                  <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                                      <li><span><i class="ri-heart-fill"></i></span></li>
-                                                      <li><span><i class="ri-add-line"></i></span></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li class="slide-item">
-                                      <a href="movie-details.html">
-                                          <div class="block-images position-relative">
-                                              <div class="img-box">
-                                                  <img src="../public/images/favorite/03.jpg" class="img-fluid" alt="">
-                                              </div>
-                                              <div class="block-description">
-                                                  <h6>Boop Bitty</h6>
-                                                  <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">15+</div>
-                                                      <span class="text-white">2h 30m</span>
+                                                      <span class="text-white">Saison 1</span>
                                                   </div>
                                                   <div class="hover-buttons">
                                                       <span class="btn btn-hover">
@@ -211,78 +191,22 @@
                                               </div>
                                               <div class="block-social-info">
                                                   <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
                                                       <li><span><i class="ri-heart-fill"></i></span></li>
                                                       <li><span><i class="ri-add-line"></i></span></li>
                                                   </ul>
                                               </div>
                                           </div>
                                       </a>
-                                  </li>
-                                  <li class="slide-item">
-                                      <a href="show-details.html">
-                                          <div class="block-images position-relative">
-                                              <div class="img-box">
-                                                  <img src="../public/images/favorite/04.jpg" class="img-fluid" alt="">
-                                              </div>
-                                              <div class="block-description">
-                                                  <h6>Dino Land</h6>
-                                                  <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">18+</div>
-                                                      <span class="text-white">3 Seasons</span>
-                                                  </div>
-                                                  <div class="hover-buttons">
-                                                      <span class="btn btn-hover">
-                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                          {{ constant('_PLAYNOW') }}
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                              <div class="block-social-info">
-                                                  <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                                      <li><span><i class="ri-heart-fill"></i></span></li>
-                                                      <li><span><i class="ri-add-line"></i></span></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li class="slide-item">
-                                      <a href="show-details.html">
-                                          <div class="block-images position-relative">
-                                              <div class="img-box">
-                                                  <img src="../public/images/favorite/05.jpg" class="img-fluid" alt="">
-                                              </div>
-                                              <div class="block-description">
-                                                  <h6>Jaction action</h6>
-                                                  <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">10+</div>
-                                                      <span class="text-white">1 Season</span>
-                                                  </div>
-                                                  <div class="hover-buttons">
-                                                      <span class="btn btn-hover">
-                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                          {{ constant('_PLAYNOW') }}
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                              <div class="block-social-info">
-                                                  <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                                      <li><span><i class="ri-heart-fill"></i></span></li>
-                                                      <li><span><i class="ri-add-line"></i></span></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </li>
+                                  </li> 
+                                {% endfor %}
+
                               </ul>
                           </div>
                       </div>
                   </div>
               </div>
           </section>
+
           <section id="iq-upcoming-movie">
               <div class="container-fluid">
                   <div class="row">
@@ -292,17 +216,24 @@
                           </div>
                           <div class="upcoming-contens">
                               <ul class="favorites-slider list-inline row p-0 mb-0">
+                                  {% if newseries == null %}
+                                <div class="d-flex align-items-center">
+                                    <h5 class="text-danger">Pas de medias pour le moments</h5>
+                                </div>
+                                {% endif %}
+
+                                  {% for newserie in newseries %}
+                                
                                   <li class="slide-item">
-                                      <a href="movie-details.html">
+                                      <a href="/serie/{{newserie.id}}/1/{{newserie.slug}}">
                                           <div class="block-images position-relative">
                                               <div class="img-box">
-                                                  <img src="../public/images/upcoming/01.jpg" class="img-fluid" alt="">
+                                                  <img src="{{newserie.image}}" class="img-fluid" alt="">
                                               </div>
                                               <div class="block-description">
-                                                  <h6>The Last Breath</h6>
+                                                  <h6>{{newserie.name}}</h6>
                                                   <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">5+</div>
-                                                      <span class="text-white">2h 30m</span>
+                                                      <span class="text-white">Saison 1</span>
                                                   </div>
                                                   <div class="hover-buttons">
                                                       <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
@@ -312,7 +243,6 @@
                                               </div>
                                               <div class="block-social-info">
                                                   <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
                                                       <li><span><i class="ri-heart-fill"></i></span></li>
                                                       <li><span><i class="ri-add-line"></i></span></li>
                                                   </ul>
@@ -320,122 +250,7 @@
                                           </div>
                                       </a>
                                   </li>
-                                  <li class="slide-item">
-                                      <a href="movie-details.html">
-                                          <div class="block-images position-relative">
-                                              <div class="img-box">
-                                                  <img src="../public/images/upcoming/02.jpg" class="img-fluid" alt="">
-                                              </div>
-                                              <div class="block-description">
-                                                  <h6>Last Night</h6>
-                                                  <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">22+</div>
-                                                      <span class="text-white">2h 15m</span>
-                                                  </div>
-                                                  <div class="hover-buttons">
-                                                      <span class="btn btn-hover">
-                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                          {{ constant('_PLAYNOW') }}
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                              <div class="block-social-info">
-                                                  <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                                      <li><span><i class="ri-heart-fill"></i></span></li>
-                                                      <li><span><i class="ri-add-line"></i></span></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li class="slide-item">
-                                      <a href="movie-details.html">
-                                          <div class="block-images position-relative">
-                                              <div class="img-box">
-                                                  <img src="../public/images/upcoming/03.jpg" class="img-fluid" alt="">
-                                              </div>
-                                              <div class="block-description">
-                                                  <h6>1980</h6>
-                                                  <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">25+</div>
-                                                      <span class="text-white">3h</span>
-                                                  </div>
-                                                  <div class="hover-buttons">
-                                                      <span class="btn btn-hover">
-                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                          {{ constant('_PLAYNOW') }}
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                              <div class="block-social-info">
-                                                  <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                                      <li><span><i class="ri-heart-fill"></i></span></li>
-                                                      <li><span><i class="ri-add-line"></i></span></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li class="slide-item">
-                                      <a href="movie-details.html">
-                                          <div class="block-images position-relative">
-                                              <div class="img-box">
-                                                  <img src="../public/images/upcoming/04.jpg" class="img-fluid" alt="">
-                                              </div>
-                                              <div class="block-description">
-                                                  <h6>Looters</h6>
-                                                  <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">11+</div>
-                                                      <span class="text-white">2h 45m</span>
-                                                  </div>
-                                                  <div class="hover-buttons">
-                                                      <span class="btn btn-hover">
-                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                          {{ constant('_PLAYNOW') }}
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                              <div class="block-social-info">
-                                                  <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                                      <li><span><i class="ri-heart-fill"></i></span></li>
-                                                      <li><span><i class="ri-add-line"></i></span></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </li>
-                                  <li class="slide-item">
-                                      <a href="movie-details.html">
-                                          <div class="block-images position-relative">
-                                              <div class="img-box">
-                                                  <img src="../public/images/upcoming/05.jpg" class="img-fluid" alt="">
-                                              </div>
-                                              <div class="block-description">
-                                                  <h6>Vugotronic</h6>
-                                                  <div class="movie-time d-flex align-items-center my-2">
-                                                      <div class="badge badge-secondary p-1 mr-2">9+</div>
-                                                      <span class="text-white">2h 30m</span>
-                                                  </div>
-                                                  <div class="hover-buttons">
-                                                      <span class="btn btn-hover">
-                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                          {{ constant('_PLAYNOW') }}
-                                                      </span>
-                                                  </div>
-                                              </div>
-                                              <div class="block-social-info">
-                                                  <ul class="list-inline p-0 m-0 music-play-lists">
-                                                      <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                                      <li><span><i class="ri-heart-fill"></i></span></li>
-                                                      <li><span><i class="ri-add-line"></i></span></li>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </li>
+                                  {% endfor %}
                               </ul>
                           </div>
                       </div>
@@ -452,7 +267,11 @@
                           </div>
                           <div class="upcoming-contens">
                               <ul class="favorites-slider list-inline row p-0 mb-0">
-
+                                {% if newmovies == null %}
+                                <div class="d-flex align-items-center">
+                                    <h5 class="text-danger">Pas de medias pour le moments</h5>
+                                </div>
+                                {% endif %}
                                 {% for newmovie in newmovies %}
                                   <li class="slide-item">
                                       <a href="movie/{{newmovie.slug}}">

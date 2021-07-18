@@ -47,6 +47,13 @@ $router->map('GET', '/movie/[:slug]', function ($slug) {
     $controller->movie($slug);
 });
 
+#CATEGORY
+
+$router->map('GET', '/category/[:slug]', function ($slug) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->category($slug);
+});
+
 $router->map('GET', '/all-movie', function () {
     $controller = new Src\controller\WebsiteController();
     $controller->allmovie();
@@ -58,18 +65,16 @@ $router->map('GET', '/all-serie', function () {
     $controller->allserie();
 });
 
-$router->map('GET', '/serie/[:slug]', function ($slug) {
-    echo $slug;
+$router->map('GET', '/serie/[i:serie]/[i:saison]/[:slug]', function ($slug, $serie, $saison) {
     $controller = new Src\controller\WebsiteController();
-    $controller->allserie();
+    $controller->serie($slug, $serie, $saison);
 });
+
+
 #Pages
-
 $router->map('GET', '/pages/[:slug]', function ($slug) {
-
-    echo $slug;
     $controller = new Src\controller\WebsiteController();
-    $controller->pages();
+    $controller->pages($slug);
 });
 
 

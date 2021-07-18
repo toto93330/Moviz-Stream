@@ -19,7 +19,7 @@ class EntitySerie
     protected $bestseller;
     protected $headerhero;
     protected $categoryid;
-    protected $likeid;
+    protected $likes;
     protected $image;
 
 
@@ -68,7 +68,7 @@ class EntitySerie
     function getYearofcreated()
     {
 
-        return $this->yearorcreated;
+        return $this->yearofcreated;
     }
 
     /**
@@ -107,7 +107,7 @@ class EntitySerie
     /**
      * Return category of serie
      *
-     * @return array
+     * @return object
      */
     function getCategoryid()
     {
@@ -118,12 +118,11 @@ class EntitySerie
     /**
      * Return total number of likes of a serie
      *
-     * @return array
+     * @return int
      */
-    function getLikeid()
+    function getLikes()
     {
-
-        return $this->likeid;
+        return $this->likes;
     }
 
     /**
@@ -194,10 +193,10 @@ class EntitySerie
      * @param string
      * @return void
      */
-    function setYearofcreated($yearorcreated)
+    function setYearofcreated($yearofcreated)
     {
 
-        $this->yearorcreated = $yearorcreated;
+        $this->yearofcreated = $yearofcreated;
     }
 
     /**
@@ -239,25 +238,23 @@ class EntitySerie
     /**
      * Set serie categoryid
      *
-     * @param array
+     * @param object
      * @return void
      */
     function setCategoryID($categoryid)
     {
-
         $this->categoryid = $categoryid;
     }
 
     /**
-     * Set serie likeid
+     * Set serie likes
      *
-     * @param array
+     * @param object
      * @return void
      */
-    function setLikeID($likeid)
+    function setLikes($likes)
     {
-
-        $this->likeid = $likeid;
+        $this->likes = $likes;
     }
 
     /**

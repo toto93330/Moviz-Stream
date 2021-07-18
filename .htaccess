@@ -1,8 +1,7 @@
-DirectoryIndex index.php
 RewriteEngine On
+RewriteBase /
 
-RewriteRule ^/?$ public/ [L]
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ public/?uri=$1 [L,QSA]
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]

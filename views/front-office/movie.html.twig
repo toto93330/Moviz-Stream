@@ -24,15 +24,15 @@
                          <li class="text-white">{{ movie.categoryid.name }}</li>
                      </ul>
                      <div class="d-flex align-items-center text-white text-detail">
-                         <span class="badge badge-secondary p-3">{{ movie.ageadapt }}</span>
+                         <span class="badge badge-secondary p-3">+{{ movie.ageadapt }}</span>
                          <span class="ml-3">{{ movie.time }}</span>
                          <span class="trending-year">{{ movie.yearofcreated }}</span>
                      </div>
 
-                     <div class="d-flex align-items-center series mb-4">
-                         <a href="javascript:void();"><img src="../public/images/trending/trending-label.png" class="img-fluid" alt=""></a>
+                     <!-- <div class="d-flex align-items-center series mb-4">
+                         <a href="javascript:void();"><img src="/images/trending/trending-label.png" class="img-fluid" alt=""></a>
                          <span class="text-gold ml-3">#2 in Series Today</span>
-                     </div>
+                     </div> -->
                      
                      <p class="trending-dec w-100 mb-0">{{ movie.content }}</p>
                      <ul class="list-inline p-0 mt-4 share-icons music-play-lists">
@@ -57,27 +57,56 @@
              <div class="row">
                  <div class="col-sm-12 overflow-hidden">
                      <div class="iq-main-header d-flex align-items-center justify-content-between">
-                         <h4 class="main-title">More Like This</h4>
-                         <a href="/all-movie" class="text-primary">View all</a>
+                         <h4 class="main-title">{{ constant('_SOMECATEGORY') }}</h4>
+                         <a href="/category/{{movie.categoryid}}" class="text-primary">View all</a>
                      </div>
                      <div class="favorites-contens">
                          <ul class="list-inline favorites-slider row p-0 mb-0">
 
-                            {% for newmovie in newmovies %}
+                            {% for samemoviecategory in samemoviescategory %}
                              <li class="slide-item">
-                                 <a href="/movie/{{newmovie.slug}}">
+                                 <a href="/movie/{{samemoviecategory.slug}}">
                                      <div class="block-images position-relative">
                                          <div class="img-box">
-                                             <img src="{{newmovie.image}}" class="img-fluid" alt="">
+                                             <img src="{{samemoviecategory.image}}" class="img-fluid" alt="">
                                          </div>
                                          <div class="block-description">
-                                             <h6>{{newmovie.name}}</h6>
+                                             <h6>{{samemoviecategory.name}}</h6>
                                              <div class="movie-time d-flex align-items-center my-2">
-                                                 <div class="badge badge-secondary p-1 mr-2">{{newmovie.ageadapt}}</div>
-                                                 <span class="text-white">{{newmovie.time}}</span>
+                                                 <div class="badge badge-secondary p-1 mr-2">{{samemoviecategory.ageadapt}}</div>
+                                                 <span class="text-white">{{samemoviecategory.time}}</span>
                                              </div>
                                              <div class="hover-buttons">
-                                                 <a href="/movie/{{newmovie.slug}}"><span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                 <a href="/movie/{{samemoviecategory.slug}}"><span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                     Play
+                                                     Now</span></a>
+                                             </div>
+                                         </div>
+                                         <div class="block-social-info">
+                                             <ul class="list-inline p-0 m-0 music-play-lists">
+                                                 <li><span><i class="ri-heart-fill"></i></span></li>
+                                                 <li><span><i class="ri-add-line"></i></span></li>
+                                             </ul>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </li>
+                              {% endfor %}
+
+                              {% for sameseriecategory in sameseriescategory %}
+                             <li class="slide-item">
+                                 <a href="/serie/{{sameseriecategory.slug}}/1/{{sameseriecategory.slug}}">
+                                     <div class="block-images position-relative">
+                                         <div class="img-box">
+                                             <img src="{{sameseriecategory.image}}" class="img-fluid" alt="">
+                                         </div>
+                                         <div class="block-description">
+                                             <h6>{{sameseriecategory.name}}</h6>
+                                             <div class="movie-time d-flex align-items-center my-2">
+                                                <span class="text-white">Saison 1</span>
+                                             </div>
+                                             <div class="hover-buttons">
+                                                 <a href="/movie/{{sameseriecategory.slug}}"><span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
                                                      Play
                                                      Now</span></a>
                                              </div>
@@ -104,28 +133,28 @@
              <div class="row">
                  <div class="col-sm-12 overflow-hidden">
                      <div class="iq-main-header d-flex align-items-center justify-content-between">
-                         <h4 class="main-title">Upcoming Movies</h4>
+                         <h4 class="main-title">{{ constant('_NEWMOVIES') }}</h4>
                          <a href="/all-movie" class="text-primary">View all</a>
                      </div>
                      <div class="upcoming-contens">
                          <ul class="favorites-slider list-inline  row p-0 mb-0">
 
 
-                            {% for mostlikedmovie in mostlikedmovies %}
+                            {% for newmovie in newmovies %}
                              <li class="slide-item">
-                                 <a href="/movie/{{mostlikedmovie.slug}}">
+                                 <a href="/movie/{{newmovie.slug}}">
                                      <div class="block-images position-relative">
                                          <div class="img-box">
-                                             <img src="{{mostlikedmovie.image}}" class="img-fluid" alt="">
+                                             <img src="{{newmovie.image}}" class="img-fluid" alt="">
                                          </div>
                                          <div class="block-description">
-                                             <h6>{{mostlikedmovie.name}}</h6>
+                                             <h6>{{newmovie.name}}</h6>
                                              <div class="movie-time d-flex align-items-center my-2">
-                                                 <div class="badge badge-secondary p-1 mr-2">{{mostlikedmovie.ageadapt}}</div>
-                                                 <span class="text-white">{{mostlikedmovie.time}}</span>
+                                                 <div class="badge badge-secondary p-1 mr-2">{{newmovie.ageadapt}}</div>
+                                                 <span class="text-white">{{newmovie.time}}</span>
                                              </div>
                                              <div class="hover-buttons">
-                                                 <a href="/movie/{{mostlikedmovie.slug}}"><span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                 <a href="/movie/{{newmovie.slug}}"><span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
                                                      Play Now
                                                  </span></a>
                                              </div>

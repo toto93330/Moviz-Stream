@@ -2,8 +2,10 @@
 
 namespace Src\Controller;
 
+use Src\Model\Likes;
 use Src\Model\Model;
 use Src\Model\Movie;
+use Src\Model\Serie;
 
 /**
  * This Class it's for front controller.
@@ -25,11 +27,18 @@ class WebsiteController
         /* GET NEW MOVIES */
         $newMovies = (new Movie())->findMediasByDescAndLimit(10);
         /* GET NEW SERIES */
+        $newSeries = (new Serie())->findMediasByDescAndLimit(10);
 
+        /* GET BESTSELLER MOVIES */
+        $bestsellermovies = (new Movie())->findMostLikedMedias(2);
+        /* GET BESTSELLER SERIES */
+        $bestsellerseries = (new Serie())->findMostLikedMedias(3);
 
         $this->render('front-office/home', [
             'newmovies' =>   $newMovies,
-
+            'newseries' =>   $newSeries,
+            'bestsellerseries' => $bestsellerseries,
+            'bestsellermovies' => $bestsellermovies,
         ]);
     }
 
@@ -45,18 +54,20 @@ class WebsiteController
         // Tranform non formated Slug
         $slug = Model::slugify($slug);
         // Take movie by slug
-        $movie = (new Movie)->Movie($slug);
-        // Take new movies
-        $newmovies = (new Movie)->newMovie(10);
-        // Take most liked movie
-        $mostlikedmovies = (new Movie)->mostlikedMovie(10);
-
-
+        $movie = (new Movie)->findMediasBySlug($slug);
+        // Take movie by same category
+        $samemoviescategory = (new Movie)->findMediasByCategory($movie[0]->getCategoryid()->getId());
+        // Take serie by same category 
+        $sameseriescategory = (new Serie)->findMediasByCategory($movie[0]->getCategoryid()->getId());
+        // Take new movie
+        $newmovies = (new Movie())->findMediasByDescAndLimit(12);
 
         $this->render('front-office/movie', [
             'movie' => $movie[0],
+            'samemoviescategory' => $samemoviescategory,
+            'sameseriescategory' => $sameseriescategory,
             'newmovies' => $newmovies,
-            'mostlikedmovies' => $mostlikedmovies
+
         ]);
     }
 
@@ -66,8 +77,19 @@ class WebsiteController
         $this->render('front-office/allserie', []);
     }
 
+    //CATEGORY
+    function category($slug)
+    {
+        $this->render('front-office/allserie', []);
+    }
 
-    //pages
+    //SERIE
+    function serie()
+    {
+        $this->render('front-office/serie', []);
+    }
+
+    //PAGES
     function pages()
     {
         $this->render('front-office/pages/', []);

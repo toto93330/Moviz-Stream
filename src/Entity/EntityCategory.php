@@ -91,4 +91,15 @@ class EntityCategory
 
         $this->slug = $slug;
     }
+
+    /**
+     * return string id
+     *
+     * @param null
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->id;
+    }
 }

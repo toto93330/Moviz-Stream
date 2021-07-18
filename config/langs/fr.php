@@ -22,3 +22,4 @@ define("_ALLMOVIES", 'Tous les films');
 define("_MOVIES", 'Films');
 define("_ALLSERIES", 'Toutes les series');
 define("_SERIES", 'Series');
+define("_SOMECATEGORY", 'Même Categorie');

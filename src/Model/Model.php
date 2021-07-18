@@ -180,6 +180,20 @@ abstract class Model
     }
 
     /**
+     * Find defined Item by id
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function findMediasByCategory($categoryid)
+    {
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE categoryid = $categoryid ORDER BY id DESC LIMIT 6");
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Find all defined items by category
      *
      * @param [type] $category

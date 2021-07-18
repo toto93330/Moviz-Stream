@@ -22,8 +22,7 @@ class EntityMovie
     protected $bestseller;
     protected $headerhero;
     protected $categoryid;
-    protected $viewsid;
-    protected $likesid;
+    protected $likes;
     protected $image;
 
 
@@ -153,22 +152,11 @@ class EntityMovie
     }
 
     /**
-     * Return total number of views of a movie
-     *
-     * @return array
-     */
-    function getViewsid()
-    {
-
-        return $this->viewsid;
-    }
-
-    /**
      * Return total number of likes of a movie
      *
-     * @return array
+     * @return int
      */
-    function getLikesid()
+    function getLikes()
     {
 
         return $this->likesid;
@@ -326,34 +314,22 @@ class EntityMovie
      * @param array
      * @return void
      */
-    function setCategoryID($categoryid)
+    function setCategoryid($categoryid)
     {
 
         $this->categoryid = $categoryid;
     }
 
     /**
-     * Set movie viewid
-     *
-     * @param array
-     * @return void
-     */
-    function setViewsID($viewsid)
-    {
-
-        $this->viewsid = $viewsid;
-    }
-
-    /**
      * Set movie likeid
      *
-     * @param array
+     * @param int
      * @return void
      */
-    function setLikesID($likesid)
+    function setLikes($likes)
     {
 
-        $this->likesid = $likesid;
+        $this->likes = $likes;
     }
 
     /**

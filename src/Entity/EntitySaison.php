@@ -13,6 +13,7 @@ class EntitySaison
 
     protected $id;
     protected $saison;
+    protected $serieid;
     protected $content;
     protected $trailer;
 
@@ -38,6 +39,16 @@ class EntitySaison
     function getSaison()
     {
         return $this->saison;
+    }
+
+    /**
+     * Return serie id
+     *
+     * @return string
+     */
+    function getSerieid()
+    {
+        return $this->serieid;
     }
 
     /**
@@ -84,6 +95,18 @@ class EntitySaison
     function setSaison($saison)
     {
         $this->saison = $saison;
+    }
+
+
+    /**
+     * Set serieid
+     *
+     * @param string
+     * @return void
+     */
+    function setSerieID($serieid)
+    {
+        $this->serieid = $serieid;
     }
 
     /**
