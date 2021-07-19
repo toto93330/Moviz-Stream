@@ -1,27 +1,3 @@
-/* AJAX SCROLL BOTTOM */
-
-
-if(window.location.pathname == '/all-serie') {
-
-	$(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-       alert("LOAD MORE!");
-   }
-});
-
-}
-
-
-if(window.location.pathname == '/all-movie') {
-
-	$(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-       alert("LOAD MORE!");
-   }
-});
-
-}
-
 
 /*----------------------------------------------
 Index Of Script
@@ -40,10 +16,10 @@ Index Of Script
 :: Video Popup
 :: Flatpicker
 :: Custom File Uploader
-
 ------------------------------------------------
 Index Of Script
 ----------------------------------------------*/
+
 
 (function (jQuery) {
 	"use strict";

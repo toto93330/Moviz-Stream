@@ -108,6 +108,27 @@ abstract class Model
     }
 
     /**
+     * Find all Medias by DESC AND LIMIT RANGE.
+     * @example init findMediasByDescAndLimitRange(0, 6)
+     * @return mixed
+     */
+    public function findMediasByDescAndLimitRange($min, $max)
+    {
+        $list = [];
+
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table ORDER BY id DESC LIMIT $min,$max");
+        $stmt->execute();
+
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $articleRaw) {
+            $list[] = $this->getInstance($articleRaw, $this->entity);
+        }
+
+        return $list;
+    }
+
+    /**
      * Return most liked medias.
      * 
      * @return mixed
@@ -159,7 +180,7 @@ abstract class Model
      */
     public function headerhero()
     {
-        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table headerhero = 1");
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE headerhero = 1");
         $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -187,7 +208,7 @@ abstract class Model
      */
     public function findMediasByCategory($categoryid)
     {
-        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE categoryid = $categoryid ORDER BY id DESC LIMIT 6");
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE categoryid = $categoryid ORDER BY id DESC LIMIT 0,6");
         $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
         $stmt->execute();
         return $stmt->fetchAll();

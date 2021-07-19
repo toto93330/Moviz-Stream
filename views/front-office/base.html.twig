@@ -9,6 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %} {{ constant('_SITETITLE') }} {% endblock %} | {% block subtitle %}
         {{ constant('_SLOGANT') }}{% endblock %}</title>
+    <!-- Slick JS -->
+    <script src="/js/ajax.js"></script>
     <!-- Favicon -->
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <!-- Bootstrap CSS -->
@@ -97,7 +99,9 @@
                                                     </form>
                                                 </div>
                                             </li>
-                                            {% if news is not empty %}
+
+
+                                            {% if constant('_HEADERNEWS') != empty %}
                                             <li class="nav-item nav-icon">
                                                 <a href="#" class="search-toggle position-relative">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -149,7 +153,7 @@
                                             </form>
                                         </div>
                                     </li>
-                                    {% if news is not empty %}
+                                    {% if constant('_HEADERNEWS') != empty %}
                                     <li class="nav-item nav-icon">
                                         <a href="#" class="search-toggle" data-toggle="search-toggle">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"

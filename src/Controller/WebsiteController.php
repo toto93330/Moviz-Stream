@@ -15,15 +15,22 @@ use Src\Model\Serie;
 class WebsiteController
 {
 
-    //404
+    #######################
+    ## 404
+    #######################
     function error404()
     {
         $this->render('front-office/404', []);
     }
 
-    //HOME
+    #######################
+    ## HOME
+    #######################
     function home()
     {
+        /* GET HEADER HERO */
+        $headersheromovie = (new Movie())->headerhero();
+        $headersheroserie = (new Serie())->headerhero();
         /* GET NEW MOVIES */
         $newMovies = (new Movie())->findMediasByDescAndLimit(10);
         /* GET NEW SERIES */
@@ -35,6 +42,8 @@ class WebsiteController
         $bestsellerseries = (new Serie())->findMostLikedMedias(3);
 
         $this->render('front-office/home', [
+            'headersheromovie' =>   $headersheromovie,
+            'headersheroserie' =>   $headersheroserie,
             'newmovies' =>   $newMovies,
             'newseries' =>   $newSeries,
             'bestsellerseries' => $bestsellerseries,
@@ -43,10 +52,19 @@ class WebsiteController
     }
 
 
-    //MOVIE
+
+    #######################
+    ## MOVIE
+    #######################
     function allmovie()
     {
-        $this->render('front-office/allmovie', []);
+        $movies = (new Movie())->findMediasByDescAndLimitRange(0, 6);
+        $headershero = (new Movie())->headerhero();
+
+        $this->render('front-office/allmovie', [
+            'movies' => $movies,
+            'headershero' => $headershero,
+        ]);
     }
 
     function movie($slug)
@@ -71,38 +89,75 @@ class WebsiteController
         ]);
     }
 
-    //SERIE
+    function allmovieajax($min)
+    {
+
+        $data = [];
+        $movies = (new Movie())->findMediasByDescAndLimitRange($min, 6);
+
+
+        for ($i = 0; $i < count($movies); $i++) {
+            $data[$i] = $movies[$i]->jsonSerialize();
+        }
+
+        header('Content-Type: application/json;charset=utf-8');
+        echo json_encode($data);
+    }
+
+    #######################
+    ## SERIE
+    #######################
     function allserie()
     {
         $this->render('front-office/allserie', []);
     }
 
-    //CATEGORY
-    function category($slug)
-    {
-        $this->render('front-office/allserie', []);
-    }
-
-    //SERIE
     function serie()
     {
         $this->render('front-office/serie', []);
     }
 
-    //PAGES
+    #######################
+    ## CATEGORY
+    #######################
+    function category($slug)
+    {
+        $slug = \intval($slug);
+
+        $categoryformovies = (new Movie)->findMediasByCategory($slug);
+        // Take serie by same category 
+        $categoryforseries = (new Serie)->findMediasByCategory($slug);
+
+        if (empty($categoryformovies) && empty($categoryforseries)) {
+            return $this->home;
+        }
+
+        $this->render('front-office/category', [
+            'categoryformovies' => $categoryformovies,
+            'categoryforseries' => $categoryforseries,
+        ]);
+    }
+
+    #######################
+    ## PAGES
+    #######################
     function pages()
     {
         $this->render('front-office/pages/', []);
     }
 
-    //CONTACT
+    #######################
+    ## CONTACT
+    #######################
     function contact()
     {
         $this->render('front-office/contact', []);
     }
 
 
-    // ROUTE RENDER
+    #######################
+    ## ROUTE RENDER
+    #######################
     protected function render(string $viewName, array $args)
     {
 

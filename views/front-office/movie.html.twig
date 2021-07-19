@@ -95,7 +95,7 @@
 
                               {% for sameseriecategory in sameseriescategory %}
                              <li class="slide-item">
-                                 <a href="/serie/{{sameseriecategory.slug}}/1/{{sameseriecategory.slug}}">
+                                 <a href="/serie/{{sameseriecategory.id}}/1/{{sameseriecategory.slug}}">
                                      <div class="block-images position-relative">
                                          <div class="img-box">
                                              <img src="{{sameseriecategory.image}}" class="img-fluid" alt="">
@@ -106,7 +106,7 @@
                                                 <span class="text-white">Saison 1</span>
                                              </div>
                                              <div class="hover-buttons">
-                                                 <a href="/movie/{{sameseriecategory.slug}}"><span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                 <a href="/serie/{{sameseriecategory.id}}/1/{{sameseriecategory.slug}}"><span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
                                                      Play
                                                      Now</span></a>
                                              </div>

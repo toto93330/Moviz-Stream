@@ -159,7 +159,7 @@ class EntityMovie
     function getLikes()
     {
 
-        return $this->likesid;
+        return $this->likes;
     }
 
     /**
@@ -354,5 +354,30 @@ class EntityMovie
     {
 
         $this->trailer = $trailer;
+    }
+
+    /////
+    // SERIALIZER
+    /////
+
+    public function jsonSerialize()
+    {
+        return
+            [
+                'id'   => $this->getId(),
+                'name' => $this->getName(),
+                'link'  => $this->getLink(),
+                'slug' => $this->getSlug(),
+                'yearofcreated' => $this->getYearofcreated(),
+                'time' => $this->getTime(),
+                'ageadapt' => $this->getAgeadapt(),
+                'content' => $this->getContent(),
+                'trailer' => $this->getTrailer(),
+                'bestseller' => $this->getBestseller(),
+                'headerhero' => $this->getHeaderhero(),
+                'categoryid' => $this->getCategoryid(),
+                'likes' => $this->getLikes(),
+                'image' => $this->getImage(),
+            ];
     }
 }

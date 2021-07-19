@@ -71,15 +71,25 @@ $router->map('GET', '/serie/[i:serie]/[i:saison]/[:slug]', function ($slug, $ser
 });
 
 
-#Pages
+#PAGES
 $router->map('GET', '/pages/[:slug]', function ($slug) {
     $controller = new Src\controller\WebsiteController();
     $controller->pages($slug);
 });
 
 
-#Contact
+#CONTACT
 $router->map('GET', '/contact', function () {
     $controller = new Src\controller\WebsiteController();
     $controller->contact();
+});
+
+#######################
+## Front Office AJAX
+#######################
+
+#ALL MOVIE AJAX
+$router->map('GET', '/ajax/all-movie/[i:min]', function ($min) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->allmovieajax($min);
 });
