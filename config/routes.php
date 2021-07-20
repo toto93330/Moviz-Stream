@@ -93,3 +93,9 @@ $router->map('GET', '/ajax/all-movie/[i:min]', function ($min) {
     $controller = new Src\controller\WebsiteController();
     $controller->allmovieajax($min);
 });
+
+#ALL SERIE AJAX
+$router->map('GET', '/ajax/all-serie/[i:min]', function ($min) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->allserieajax($min);
+});

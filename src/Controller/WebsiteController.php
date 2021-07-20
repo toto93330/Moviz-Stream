@@ -58,7 +58,9 @@ class WebsiteController
     #######################
     function allmovie()
     {
+        /* GET MOVIE */
         $movies = (new Movie())->findMediasByDescAndLimitRange(0, 6);
+        /* GET MOVIE FOR HERO HEADER */
         $headershero = (new Movie())->headerhero();
 
         $this->render('front-office/allmovie', [
@@ -109,12 +111,33 @@ class WebsiteController
     #######################
     function allserie()
     {
-        $this->render('front-office/allserie', []);
+        /* GET SERIE */
+        $series = (new Serie())->findMediasByDescAndLimitRange(0, 6);
+        /* GET SERIE FOR HERO HEADER */
+        $headershero = (new Serie())->headerhero();
+        $this->render('front-office/allserie', [
+            'series' => $series,
+            'headershero' => $headershero,
+        ]);
     }
 
     function serie()
     {
         $this->render('front-office/serie', []);
+    }
+
+    function allserieajax($min)
+    {
+        $data = [];
+        $movies = (new Serie())->findMediasByDescAndLimitRange($min, 6);
+
+
+        for ($i = 0; $i < count($movies); $i++) {
+            $data[$i] = $movies[$i]->jsonSerialize();
+        }
+
+        header('Content-Type: application/json;charset=utf-8');
+        echo json_encode($data);
     }
 
     #######################
