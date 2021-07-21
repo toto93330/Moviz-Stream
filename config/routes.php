@@ -54,6 +54,16 @@ $router->map('GET', '/category/[:slug]', function ($slug) {
     $controller->category($slug);
 });
 
+$router->map('GET', '/series/category/[:id]', function ($id) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->categoryseries($id);
+});
+
+$router->map('GET', '/movies/category/[:id]', function ($id) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->categorymovies($id);
+});
+
 $router->map('GET', '/all-movie', function () {
     $controller = new Src\controller\WebsiteController();
     $controller->allmovie();
@@ -84,6 +94,12 @@ $router->map('GET', '/contact', function () {
     $controller->contact();
 });
 
+#SEARCH
+$router->map('POST', '/search', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->search();
+});
+
 #######################
 ## Front Office AJAX
 #######################
@@ -98,4 +114,16 @@ $router->map('GET', '/ajax/all-movie/[i:min]', function ($min) {
 $router->map('GET', '/ajax/all-serie/[i:min]', function ($min) {
     $controller = new Src\controller\WebsiteController();
     $controller->allserieajax($min);
+});
+
+#MOVIES CATEGORY
+$router->map('GET', '/ajax/movies/category/[i:id]/[i:min]', function ($id, $min) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->categorymoviesajax($id, $min);
+});
+
+#SERIES CATEGORY
+$router->map('GET', '/ajax/series/category/[i:id]/[i:min]', function ($id, $min) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->categoryseriesajax($id, $min);
 });

@@ -48,6 +48,47 @@ class WebsiteConfig
         define('_HEADERNEWS', $items);
     }
 
+
+    /**
+     * Init All category for movie and serie in header menu.
+     * @return mixed
+     */
+    static function MediasCategory()
+    {
+        // Take Movie Category
+        $moviecategory = array();
+        $stmt = Connexion::dbConnect()->prepare("SELECT categoryid FROM movie AS m, category AS cat WHERE cat.id = m.categoryid GROUP BY m.categoryid");
+        $stmt->execute();
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $key => $value) {
+
+            $stmt = Connexion::dbConnect()->prepare("SELECT * FROM category WHERE id = " . strval($value["categoryid"]) . "");
+            $stmt->execute();
+            $items = $stmt->fetchAll();
+            $moviecategory[$key] = $items;
+        }
+
+        define('_MOVIECATEGORY', $moviecategory);
+
+        // Take Movie Category
+        $seriecategory = array();
+        $stmt = Connexion::dbConnect()->prepare("SELECT categoryid FROM serie AS s, category AS cat WHERE cat.id = s.categoryid GROUP BY s.categoryid");
+        $stmt->execute();
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $key => $value) {
+
+            $stmt = Connexion::dbConnect()->prepare("SELECT * FROM category WHERE id = " . strval($value["categoryid"]) . "");
+            $stmt->execute();
+            $items = $stmt->fetchAll();
+            $seriecategory[$key] = $items;
+        }
+
+        define('_SERIECATEGORY', $seriecategory);
+    }
+
+
     /**
      * Init Language.
      * @return mixed

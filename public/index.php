@@ -34,6 +34,11 @@ WebsiteConfig::websiteNews();
 WebsiteConfig::websiteLanguage();
 
 ####
+# INIT MEDIAS CATEGORY FOR HEADER
+####
+WebsiteConfig::MediasCategory();
+
+####
 # INIT ROUTE
 ####
 $router = new AltoRouter();

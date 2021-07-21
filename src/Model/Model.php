@@ -78,12 +78,18 @@ abstract class Model
      */
     public function findAll()
     {
-        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table");
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
+        $list = [];
 
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table");
+        $stmt->execute();
+        $items = $stmt->fetchAll();
+
+        foreach ($items as $articleRaw) {
+            $list[] = $this->getInstance($articleRaw, $this->entity);
+        }
+
+        return $list;
+    }
 
 
     /**
@@ -197,7 +203,7 @@ abstract class Model
         $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE id = $id");
         $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll()[0];
     }
 
     /**
@@ -206,26 +212,26 @@ abstract class Model
      * @param [type] $id
      * @return void
      */
-    public function findMediasByCategory($categoryid)
+    public function findMediasByCategory($categoryid, $min)
     {
-        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE categoryid = $categoryid ORDER BY id DESC LIMIT 0,6");
+        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE categoryid = $categoryid ORDER BY id DESC LIMIT $min,6");
         $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
     /**
-     * Find all defined items by category
+     * Find name by id
      *
-     * @param [type] $category
+     * @param [type] $id
      * @return void
      */
-    public function findByCategory($category)
+    public function findNameById($id)
     {
-        $stmt = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE category = $category");
+        $stmt = $this->dbConnect()->prepare("SELECT name FROM $this->table WHERE id = $id");
         $stmt->setFetchMode(\PDO::FETCH_CLASS, get_class($this), [$this->dbConnect()]);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll()[0];
     }
 
     /**

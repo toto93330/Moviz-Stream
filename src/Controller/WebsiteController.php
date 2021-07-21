@@ -2,6 +2,7 @@
 
 namespace Src\Controller;
 
+use Src\Model\Category;
 use Src\Model\Likes;
 use Src\Model\Model;
 use Src\Model\Movie;
@@ -23,11 +24,13 @@ class WebsiteController
         $this->render('front-office/404', []);
     }
 
+
     #######################
     ## HOME
     #######################
     function home()
     {
+
         /* GET HEADER HERO */
         $headersheromovie = (new Movie())->headerhero();
         $headersheroserie = (new Serie())->headerhero();
@@ -151,15 +154,72 @@ class WebsiteController
         // Take serie by same category 
         $categoryforseries = (new Serie)->findMediasByCategory($slug);
 
-        if (empty($categoryformovies) && empty($categoryforseries)) {
-            return $this->home;
-        }
+        // if (empty($categoryformovies) && empty($categoryforseries)) {
+        //     return $this->home;
+        // }
 
         $this->render('front-office/category', [
             'categoryformovies' => $categoryformovies,
             'categoryforseries' => $categoryforseries,
         ]);
     }
+
+    #######################
+    ## CATEGORY FOR MOVIE
+    #######################
+    function categorymovies($id)
+    {
+        $movies = (new movie())->findMediasByCategory($id, 0);
+        $category = (new Category())->findByID($id);
+
+        $this->render('front-office/categorymovies', [
+            'movies' => $movies,
+            'category' => $category,
+        ]);
+    }
+
+    function categorymoviesajax($id, $min)
+    {
+        $data = [];
+        $movies = (new movie())->findMediasByCategory($id, $min);
+
+
+        for ($i = 0; $i < count($movies); $i++) {
+            $data[$i] = $movies[$i]->jsonSerialize();
+        }
+
+        header('Content-Type: application/json;charset=utf-8');
+        echo json_encode($data);
+    }
+
+    #######################
+    ## CATEGORY FO SERIE
+    #######################
+    function categoryseries($id)
+    {
+        $category = (new Category())->findByID($id);
+        $series = (new Serie())->findMediasByCategory($id, 0);
+
+        $this->render('front-office/categoryseries', [
+            'series' => $series,
+            'category' => $category,
+        ]);
+    }
+
+    function categoryseriesajax($id, $min)
+    {
+        $data = [];
+        $series = (new Serie())->findMediasByCategory($id, $min);
+
+
+        for ($i = 0; $i < count($series); $i++) {
+            $data[$i] = $series[$i]->jsonSerialize();
+        }
+
+        header('Content-Type: application/json;charset=utf-8');
+        echo json_encode($data);
+    }
+
 
     #######################
     ## PAGES
@@ -175,6 +235,21 @@ class WebsiteController
     function contact()
     {
         $this->render('front-office/contact', []);
+    }
+
+    #######################
+    ## SEARCH
+    #######################
+    function search()
+    {
+        echo ($_POST['search']);
+
+        $array = [];
+        $movies = (new Movie)->findMediasByDescAndLimit(10);
+
+        \var_dump($movies[0]->getName());
+
+        $this->render('front-office/search', []);
     }
 
 

@@ -60,8 +60,11 @@
                                                 <!-- ALL SERIE -->
                                             <a class="menu-item dropdown-item" href="/all-serie">{{ constant('_ALLSERIES') }}</a>
                                                 <!-- ALL SERIE CATEGORY -->
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Humour</a>
+                                            {% for seriecategory in constant('_SERIECATEGORY') %}
+                                                {% for key, category in seriecategory %}
+                                                    <a class="dropdown-item" href="/series/category/{{seriecategory[key]['id']}}">{{seriecategory[key]['name']}}</a>
+                                                {% endfor %}
+                                            {% endfor %}
                                             </div>
                                         </li>
                                         <li class="menu-item dropdown">
@@ -70,8 +73,14 @@
                                                 <!-- ALL MOVIE -->
                                             <a class="menu-item dropdown-item" href="/all-movie">{{ constant('_ALLMOVIES') }}</a>
                                                 <!-- ALL MOVIE CATEGORY -->
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Humour</a>
+                                                {% for moviecategory in constant('_MOVIECATEGORY') %}
+
+                                                    {% for key, category in moviecategory %}
+                                                        <a class="dropdown-item" href="/movies/category/{{moviecategory[key]['id']}}">{{moviecategory[key]['name']}}</a>
+                                                    {% endfor %}
+                                              
+                                                {% endfor %}
+                                            
                                             </div>
                                         </li>
                                     </ul>
@@ -90,9 +99,9 @@
                                                     <i class="ri-search-line"></i>
                                                 </a>
                                                 <div class="search-box iq-search-bar">
-                                                    <form action="#" class="searchbox">
+                                                    <form action="/search" class="searchbox" method="POST">
                                                         <div class="form-group position-relative">
-                                                            <input type="text" class="text search-input font-size-12"
+                                                            <input type="text" name="search" class="text search-input font-size-12"
                                                                 placeholder="{{ constant('_TYPEHERETOSEARCH') }}">
                                                             <i class="search-link ri-search-line"></i>
                                                         </div>
@@ -144,9 +153,9 @@
                                             <i class="ri-search-line"></i>
                                         </a>
                                         <div class="search-box iq-search-bar d-search">
-                                            <form action="#" class="searchbox">
+                                            <form action="/search" class="searchbox" method="POST">
                                                 <div class="form-group position-relative">
-                                                    <input type="text" class="text search-input font-size-12"
+                                                    <input type="text" name="search" class="text search-input font-size-12"
                                                         placeholder="{{ constant('_TYPEHERETOSEARCH') }}">
                                                     <i class="search-link ri-search-line"></i>
                                                 </div>
