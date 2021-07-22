@@ -238,3 +238,72 @@ function onClickMoreCategorySerie(id) {
         xhr.responseType = "json";
         xhr.send();
 };
+
+
+function onClickViewEpisode(id) {
+    var w = document.getElementById("load-data");
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = this.response;
+                w.innerHTML = '<iframe class="embed-responsive-item" allowfullscreen="" src="'+ data.link  +'" frameborder="0" height="350px"></iframe>';
+
+        }
+    }
+
+        var url = protocol + "//" + host + "/ajax/series/episode/"+ id;
+
+        this.min = this.min + 6;
+        xhr.open("GET", url);
+        xhr.responseType = "json";
+        xhr.send();
+};
+
+
+function onClickLoadEpisodes(saisonid, serieid) {
+    var w = document.getElementById("load-episode");
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = this.response;
+            w.innerHTML = '';
+            for (let index = 0; index < this.response.length; index++) {
+                w.innerHTML += '<div class="col-1-5 col-md-6 iq-mb-30">'+
+                        '<div class="epi-box">'+
+                           '<a href="#" data-toggle="modal" data-target="#exampleModal" onclick="onClickViewEpisode('+ data[index].id +')"></a>'+
+                           '<div class="epi-img position-relative">'+
+                              '<img src="'+ data[index].image +'" class="img-fluid img-zoom" alt="">'+
+                              '<div class="episode-number">'+ (index+1) +'</div>'+
+                              '<div class="episode-play-info">'+
+                                 '<div class="episode-play">'+
+                                    '<a href="#" data-toggle="modal" data-target="#exampleModal" onclick="onClickViewEpisode('+ data[index].id +')">'+
+                                       '<i class="ri-play-fill"></i>'+
+                                    '</a>'+
+                                 '</div>'+
+                              '</div>'+
+                           '</div>'+
+                           '<div class="epi-desc p-3">'+
+                              '<div class="d-flex align-items-center justify-content-between">'+
+                                 '<span class="text-primary">'+ data[index].time +'</span>'+
+                              '</div>'+
+                              '<a>'+
+                                 '<h6 class="epi-name text-white mb-0">'+ data[index].name +'</h6>'+
+                              '</a>'+
+                           '</div>'+
+                           '</a>'+
+                        '</div>'+
+                     '</div>';
+                
+            }
+
+        }
+    }
+
+        var url = protocol + "//" + host + "/ajax/series/loadepisode/"+ saisonid +"/"+serieid;
+
+        xhr.open("GET", url);
+        xhr.responseType = "json";
+        xhr.send();
+};

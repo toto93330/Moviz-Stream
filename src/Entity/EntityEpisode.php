@@ -14,6 +14,7 @@ class EntityEpisode
     protected $name;
     protected $slug;
     protected $link;
+    protected $time;
     protected $content;
     protected $serieid;
     protected $saisonid;
@@ -66,6 +67,17 @@ class EntityEpisode
     {
 
         return $this->link;
+    }
+
+    /**
+     * Return serie time
+     *
+     * @return string
+     */
+    function getTime()
+    {
+
+        return $this->time;
     }
 
     /**
@@ -156,7 +168,7 @@ class EntityEpisode
     }
 
     /**
-     * Return serie link
+     * Set serie link
      *
      * @param string
      * @return void
@@ -165,6 +177,18 @@ class EntityEpisode
     {
 
         $this->link = $link;
+    }
+
+    /**
+     * Return serie time
+     *
+     * @param string
+     * @return void
+     */
+    function setTime($time)
+    {
+
+        $this->time = $time;
     }
 
     /**

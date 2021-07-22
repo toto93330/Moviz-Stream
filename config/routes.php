@@ -75,9 +75,9 @@ $router->map('GET', '/all-serie', function () {
     $controller->allserie();
 });
 
-$router->map('GET', '/serie/[i:serie]/[i:saison]/[:slug]', function ($slug, $serie, $saison) {
+$router->map('GET', '/serie/[i:serie]/[i:saison]/[:slug]', function ($serie, $saison, $slug) {
     $controller = new Src\controller\WebsiteController();
-    $controller->serie($slug, $serie, $saison);
+    $controller->serie($serie, $saison, $slug);
 });
 
 
@@ -126,4 +126,16 @@ $router->map('GET', '/ajax/movies/category/[i:id]/[i:min]', function ($id, $min)
 $router->map('GET', '/ajax/series/category/[i:id]/[i:min]', function ($id, $min) {
     $controller = new Src\controller\WebsiteController();
     $controller->categoryseriesajax($id, $min);
+});
+
+#SERIES EPISODE
+$router->map('GET', '/ajax/series/episode/[i:id]', function ($id) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->serieepisodeajax($id);
+});
+
+#SERIES LOAD ALL EPISODE BY SAISON
+$router->map('GET', '/ajax/series/loadepisode/[i:saisonid]/[i:serieid]', function ($saisonid, $serieid) {
+    $controller = new Src\controller\WebsiteController();
+    $controller->serieloadepisodeajax($saisonid, $serieid);
 });

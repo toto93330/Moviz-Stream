@@ -3,9 +3,10 @@
 namespace Src\Controller;
 
 use Src\Model\Category;
-use Src\Model\Likes;
+use Src\Model\Episode;
 use Src\Model\Model;
 use Src\Model\Movie;
+use Src\Model\Saison;
 use Src\Model\Serie;
 
 /**
@@ -124,9 +125,19 @@ class WebsiteController
         ]);
     }
 
-    function serie()
+    function serie($serie, $saison, $slug)
     {
-        $this->render('front-office/serie', []);
+        $episodes = (new Episode())->findEpisodesBySaison($serie, $saison);
+        $serie = (new Serie())->findMediasBySlug($slug);
+        $saisons = (new Saison)->findBySerieId($serie[0]->getId());
+        $serieid = $serie[0]->getId();
+
+        $this->render('front-office/serie', [
+            'serie' => $serie[0],
+            'episodes' => $episodes,
+            'saisons' => $saisons,
+            'serieid' => $serieid,
+        ]);
     }
 
     function allserieajax($min)
@@ -141,6 +152,24 @@ class WebsiteController
 
         header('Content-Type: application/json;charset=utf-8');
         echo json_encode($data);
+    }
+
+
+    function serieepisodeajax($id)
+    {
+        $serie = (new Episode())->findByID($id);
+
+
+        header('Content-Type: application/json;charset=utf-8');
+        echo json_encode($serie);
+    }
+
+    function serieloadepisodeajax($saisonid, $serieid)
+    {
+        $movies = (new Episode())->findEpisodes($serieid, $saisonid);
+
+        header('Content-Type: application/json;charset=utf-8');
+        echo json_encode($movies);
     }
 
     #######################
