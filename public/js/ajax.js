@@ -112,7 +112,7 @@ function onClickMoreSerie() {
         }
     }
 
-        var url = protocol + "//" + host + "/ajax/all-movie/"+this.min;
+        var url = protocol + "//" + host + "/ajax/all-serie/"+this.min;
 
         this.min = this.min + 6;
         xhr.open("GET", url);

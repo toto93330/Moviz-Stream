@@ -2,12 +2,13 @@
 
 namespace Src\Controller;
 
-use Src\Model\Category;
-use Src\Model\Episode;
 use Src\Model\Model;
 use Src\Model\Movie;
-use Src\Model\Saison;
 use Src\Model\Serie;
+use Src\Model\Saison;
+use Src\Model\Contact;
+use Src\Model\Episode;
+use Src\Model\Category;
 
 /**
  * This Class it's for front controller.
@@ -80,9 +81,9 @@ class WebsiteController
         // Take movie by slug
         $movie = (new Movie)->findMediasBySlug($slug);
         // Take movie by same category
-        $samemoviescategory = (new Movie)->findMediasByCategory($movie[0]->getCategoryid()->getId());
+        $samemoviescategory = (new Movie)->findMediasByCategory($movie[0]->getCategoryid()->getId(), 0);
         // Take serie by same category 
-        $sameseriescategory = (new Serie)->findMediasByCategory($movie[0]->getCategoryid()->getId());
+        $sameseriescategory = (new Serie)->findMediasByCategory($movie[0]->getCategoryid()->getId(), 0);
         // Take new movie
         $newmovies = (new Movie())->findMediasByDescAndLimit(12);
 
@@ -263,7 +264,61 @@ class WebsiteController
     #######################
     function contact()
     {
-        $this->render('front-office/contact', []);
+
+        if (!empty($_POST)) {
+
+            // TEST EMAIL EXIST AND EMAIL IS VALID
+            if (isset($_POST["email"])) {
+                if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                    return $_POST["error"] = "Please enter valid email";
+                }
+
+                // TEST SUBJECT EXIST
+                if (!isset($_POST["select"])) {
+                    return $_POST["error"] = "Suject dont exist";
+                }
+                // TEST CONTENT EXIST
+                if (!isset($_POST["content"])) {
+                    return $_POST["error"] = "Content dont exist";
+                }
+                // TEST CAPTCHA EXIST AND IS VALID
+                if (isset($_POST["captcha"])) {
+                    if ($_POST["captcha"] == $_SESSION['captcha']) {
+
+                        //CREATE CONTACT MESSAGE
+                        $message = new Contact();
+                        $message->addMessage($_POST["email"], $_POST["select"], $_POST["content"]);
+                        $_POST["success"] = "Your message as been sended";
+                    } else {
+                        $_POST["error"] = "Captcha is invalid";
+                    }
+                } else {
+                    return $_POST["error"] = "Captcha non renseigné";
+                }
+            } else {
+                return $_POST["error"] = "Email dont exist";
+            }
+        }
+
+        //GET ERROR MESSAGE
+        if (isset($_POST["error"])) {
+            $error = $_POST["error"];
+        } else {
+            $error = null;
+        }
+
+
+        //GET SUCCESS MESSAGE
+        if (isset($_POST["success"])) {
+            $success = $_POST["success"];
+        } else {
+            $success = null;
+        }
+
+        $this->render('front-office/contact', [
+            'error' => $error,
+            'success' => $success,
+        ]);
     }
 
     #######################

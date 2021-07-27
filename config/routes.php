@@ -94,6 +94,12 @@ $router->map('GET', '/contact', function () {
     $controller->contact();
 });
 
+#CONTACT
+$router->map('POST', '/contact', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->contact();
+});
+
 #SEARCH
 $router->map('POST', '/search', function () {
     $controller = new Src\controller\WebsiteController();
