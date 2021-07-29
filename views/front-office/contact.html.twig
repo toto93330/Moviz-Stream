@@ -3,26 +3,26 @@
       {% block content %}
 <section class="m-profile">
     <div class="container">
-        <h1>Contact Us</h1>
+        <h1>{{constant('_CONTACTUS')}}</h1>
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <form method="post" action="/contact">
                     <div class="mb-3">
-                        <label for="emailadresse" class="form-label">Email Address</label>
+                        <label for="emailadresse" class="form-label">{{constant('_EMAILADRESS')}}</label>
                         <input type="email" class="form-control" id="emailadresse" aria-describedby="emailHelp" name="email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="subject" class="form-label">Message Subject</label>
+                        <label for="subject" class="form-label">{{constant('_MESSAGESUBJECT')}}</label>
                         <select class="form-select" aria-label="Default select example" name="select">
-                            <option selected>Select a subject</option>
-                            <option value="Remove content">Remove content</option>
-                            <option value="Problem with site">Problem with site</option>
-                            <option value="Video request">Video request</option>
-                            <option value="other">Other</option>
+                            <option selected>{{constant('_SELECTASUBJECT')}}</option>
+                            <option value="Remove content">{{constant('_REMOVECONTENT')}}</option>
+                            <option value="Problem with site">{{constant('_PROBLEMEWITHSITE')}}</option>
+                            <option value="Video request">{{constant('_VIDEOREQUEST')}}</option>
+                            <option value="other">{{constant('_OTHER')}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="content" class="form-label">Message content</label>
+                        <label for="content" class="form-label">{{constant('_MESSAGECONTENT')}}</label>
                         <textarea class="form-control" id="content" rows="3" style="height: 256px;" name="content" required></textarea>
                     </div>
 
@@ -31,7 +31,7 @@
                         <center><img class="p-3" src="Captcha.php" alt="captcha"></center>
                         <input type="text" class="form-control" id="captcha" name="captcha" required>
                     </div>
-                    <button type="submit" class="btn btn-outline-danger">Submit</button>
+                    <button type="submit" class="btn btn-outline-danger">{{constant('_SUBMIT')}}</button>
                 </form>
                 {% if error is not empty %}
 

@@ -133,12 +133,14 @@ class WebsiteController
         $serie = (new Serie())->findMediasBySlug($slug);
         $saisons = (new Saison)->findBySerieId($serie[0]->getId());
         $serieid = $serie[0]->getId();
+        $saisonnumber = (\count($saisons));
 
         $this->render('front-office/serie', [
             'serie' => $serie[0],
             'episodes' => $episodes,
             'saisons' => $saisons,
             'serieid' => $serieid,
+            'saisonnumber' => $saisonnumber,
         ]);
     }
 

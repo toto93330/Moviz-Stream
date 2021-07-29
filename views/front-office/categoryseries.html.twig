@@ -23,11 +23,11 @@
                                     <div class="block-description">
                                         <h6>{{serie.name}}</h6>
                                         <div class="movie-time d-flex align-items-center my-2">
-                                            <div class="badge badge-secondary p-1 mr-2">Saison 1</div>
+                                            <div class="badge badge-secondary p-1 mr-2">{{constant('_SEASON')}} 1</div>
                                         </div>
                                         <div class="hover-buttons">
                                             <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                Play Now
+                                                {{constant('_PLAYNOW')}}
                                             </span>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@
 
                     </div>
                     <div class="d-flex justify-content-center pb-5" id="js-button">
-                        <a onclick="onClickMorCategoryVideo({{ category.id }})" class="btn btn-hover">Load More</a>
+                        <a onclick="onClickMorCategoryVideo({{ category.id }})" class="btn btn-hover">{{constant('_LOADMORE')}}</a>
                     </div>
                 </div>
             </div>
