@@ -31,7 +31,7 @@ class Contact extends Model
     function addMessage($email, $subject, $content)
     {
 
-        $stmt = $this->dbConnect()->prepare("INSERT INTO `contact`(`email`, `subject`, `content`) VALUES (?,?,?)");
+        $stmt = $this->dbConnect()->prepare("INSERT INTO $this->table(`email`, `subject`, `content`) VALUES (?,?,?)");
         $stmt->execute([$email, $subject, $content]);
     }
 }

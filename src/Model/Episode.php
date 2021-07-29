@@ -7,7 +7,6 @@
 
 namespace Src\Model;
 
-use Src\Model\Model;
 use Src\Entity\EntityEpisode;
 
 /**

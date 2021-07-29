@@ -2,6 +2,7 @@
 
 namespace Src\Controller;
 
+use Src\Model\Page;
 use Src\Model\Model;
 use Src\Model\Movie;
 use Src\Model\Serie;
@@ -254,9 +255,13 @@ class WebsiteController
     #######################
     ## PAGES
     #######################
-    function pages()
+    function pages($slug)
     {
-        $this->render('front-office/pages/', []);
+        $pages = (new Page())->findMediasBySlug($slug);
+
+        $this->render('front-office/pages/', [
+            'pages' => $pages,
+        ]);
     }
 
     #######################

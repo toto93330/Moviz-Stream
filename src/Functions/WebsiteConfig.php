@@ -48,7 +48,6 @@ class WebsiteConfig
         define('_HEADERNEWS', $items);
     }
 
-
     /**
      * Init All category for movie and serie in header menu.
      * @return mixed
