@@ -1,55 +1,59 @@
       {% extends "base.html.twig" %}
 
       {% block content %}
-<!-- MainContent -->
-<div class="main-content ">
-    <section id="iq-favorites">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12 overflow-hidden">
-                    <div class="iq-main-header d-flex align-items-center justify-content-between pt-5">
-                        <h4 class="main-title">{{ category.name }}</h4>
-                    </div>
+      <!-- MainContent -->
+      <div class="main-content ">
+          <section id="iq-favorites">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-sm-12 overflow-hidden">
+                          <div class="iq-main-header d-flex align-items-center justify-content-between pt-5">
+                              <h4 class="main-title">{{ category.name }}</h4>
+                          </div>
 
-                    <div class="d-flex justify-content-evenly flex-wrap" id="load-data">
+                          <div class="d-flex justify-content-evenly flex-wrap" id="load-data">
 
-                       {% for serie in series %}
-                         <div class="b-block ml-3 mr-3 mb-5 video-items" data-slick-index="0" aria-hidden="false" style="width: 432px;" tabindex="0" style="">
-                            <a href="/serie/{{serie.id}}/1/{{serie.slug}}" tabindex="0">
-                                <div class="block-images position-relative">
-                                    <div class="img-box">
-                                        <img src="{{serie.image}}" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="block-description">
-                                        <h6>{{serie.name}}</h6>
-                                        <div class="movie-time d-flex align-items-center my-2">
-                                            <div class="badge badge-secondary p-1 mr-2">{{constant('_SEASON')}} 1</div>
-                                        </div>
-                                        <div class="hover-buttons">
-                                            <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                {{constant('_PLAYNOW')}}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="block-social-info">
-                                        <ul class="list-inline p-0 m-0 music-play-lists">
-                                            <li><span><i class="ri-heart-fill"></i></span></li>
-                                            <li><span><i class="ri-add-line"></i></span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>       
-                       {% endfor %}
-                    
+                              {% for serie in series %}
+                              <div class="b-block ml-3 mr-3 mb-5 video-items" data-slick-index="0" aria-hidden="false"
+                                  style="width: 432px;" tabindex="0" style="">
+                                  <a href="/serie/{{serie.id}}/1/{{serie.slug}}" tabindex="0">
+                                      <div class="block-images position-relative">
+                                          <div class="img-box">
+                                              <img src="{{serie.image}}" class="img-fluid" alt="">
+                                          </div>
+                                          <div class="block-description">
+                                              <h6>{{serie.name}}</h6>
+                                              <div class="movie-time d-flex align-items-center my-2">
+                                                  <div class="badge badge-secondary p-1 mr-2">{{constant('_SEASON')}} 1
+                                                  </div>
+                                              </div>
+                                              <div class="hover-buttons">
+                                                  <span class="btn btn-hover"><i class="fa fa-play mr-1"
+                                                          aria-hidden="true"></i>
+                                                      {{constant('_PLAYNOW')}}
+                                                  </span>
+                                              </div>
+                                          </div>
+                                          <div class="block-social-info">
+                                              <ul class="list-inline p-0 m-0 music-play-lists">
+                                                  <li><span><i class="ri-heart-fill"></i></span></li>
+                                                  <li><span><i class="ri-add-line"></i></span></li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </a>
+                              </div>
+                              {% endfor %}
 
 
-                    </div>
-                    <div class="d-flex justify-content-center pb-5" id="js-button">
-                        <a onclick="onClickMorCategoryVideo({{ category.id }})" class="btn btn-hover">{{constant('_LOADMORE')}}</a>
-                    </div>
-                </div>
-            </div>
-    </section>
-</div>
-{% endblock %}
+
+                          </div>
+                          <div class="d-flex justify-content-center pb-5" id="js-button">
+                              <a onclick="onClickMorCategoryVideo({{ category.id }})"
+                                  class="btn btn-hover">{{constant('_LOADMORE')}}</a>
+                          </div>
+                      </div>
+                  </div>
+          </section>
+      </div>
+      {% endblock %}

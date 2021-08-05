@@ -296,7 +296,7 @@ abstract class Model
     {
         $paramsArray = parse_ini_file("../config/config.inc.ini", true);
         $salt = $paramsArray['salt']['salt'];
-        $this->encryptPassword = md5($password . $salt);
+        return md5('bcrypt_' . $password . $salt);
     }
 
     /**
@@ -330,12 +330,55 @@ abstract class Model
         return $text;
     }
 
+    /**
+     * Verif captcha is valid.
+     * @param string $captcha.
+     */
+    function verifcaptcha($captcha)
+    {
+        if ($_SESSION['captcha'] != $captcha) {
+            return $_SESSION["ERROR"] = 'Error : invalid captcha';
+        }
+    }
+
+
+    /**
+     * VERIF FORMAT AND IF EMAIL EXIST ON DATABASE
+     * @param string $email
+     * @return void
+     */
+    function verifEmailExistAndFormat($email)
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $_SESSION["ERROR"] = 'Error : Enter Valid email';
+        }
+
+        $emailexist = $this->findEmail($email);
+
+        if (!empty($emailexist)) {
+            return $_SESSION["ERROR"] = 'Error : Your Email is allready exist';
+        }
+    }
+
+
+    /**
+     * VERIF EMAIL FORMAT
+     * @param string $email
+     * @return void
+     */
+    function verifEmailFormat($email)
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $_SESSION["ERROR"] = 'Error : Enter Valid email';
+        }
+    }
+
 
     public static function dataExist($data, string $message)
     {
 
         if (empty($data)) {
-            $_SESSION['error'] = $message;
+            $_SESSION['ERROR'] = $message;
             return header('Location: /');
         }
     }

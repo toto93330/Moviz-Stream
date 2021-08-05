@@ -33,17 +33,13 @@
                     </div>
                     <button type="submit" class="btn btn-outline-danger">{{constant('_SUBMIT')}}</button>
                 </form>
-                {% if error is not empty %}
+                            {% if session.ERROR is not null %}
+                            <p class="text-danger text-center pt-2">{{session.ERROR}}</p>
+                            {% endif %}
 
-                    <div class="text-center pt-3 text-danger">{{ error }}</div>
-
-                {% endif %}
-
-                 {% if success is not empty %}
-
-                    <div class="text-center pt-3 text-success">{{ success }}</div>
-
-                {% endif %}
+                            {% if session.SUCCESS is not null %}
+                            <p class="text-success text-center pt-2">{{session.SUCCESS}}</p>
+                            {% endif %}
             </div>
         </div>
     </div>

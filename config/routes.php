@@ -106,6 +106,31 @@ $router->map('POST', '/search', function () {
     $controller->search();
 });
 
+#LOGIN
+$router->map('GET', '/login', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->login();
+});
+
+#LOGIN
+$router->map('POST', '/login', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->login();
+});
+
+#REGISTER
+$router->map('GET', '/register', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->register();
+});
+
+#REGISTER
+$router->map('POST', '/register', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->register();
+});
+
+
 #######################
 ## Front Office AJAX
 #######################

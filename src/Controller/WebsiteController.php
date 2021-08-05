@@ -2,6 +2,7 @@
 
 namespace Src\Controller;
 
+use Src\Functions\Core;
 use Src\Model\Page;
 use Src\Model\Model;
 use Src\Model\Movie;
@@ -10,6 +11,7 @@ use Src\Model\Saison;
 use Src\Model\Contact;
 use Src\Model\Episode;
 use Src\Model\Category;
+use Src\Model\User;
 
 /**
  * This Class it's for front controller.
@@ -27,12 +29,45 @@ class WebsiteController
         $this->render('front-office/404', []);
     }
 
+    #######################
+    ## LOGIN
+    #######################
+    function login()
+    {
+        /* IF USER IS ALLREADY LOGED REDIRECT TO HOME PAGE */
+        Core::redirectUserIfConnected();
+
+        /* LOGIN */
+        (new User())->loginUser();
+
+        $this->render('front-office/login', []);
+    }
+
+
+    #######################
+    ## REGISTER
+    #######################
+    function register()
+    {
+        /* IF USER IS ALLREADY LOGED REDIRECT TO HOME PAGE */
+        Core::redirectUserIfConnected();
+
+        /* ADD USER ON POST */
+        (new User())->addUser();
+
+        $this->render('front-office/register', []);
+    }
+
 
     #######################
     ## HOME
     #######################
     function home()
     {
+
+        /* TEST USER IS ADMIN */
+        Core::userIsAdmin();
+
 
         /* GET HEADER HERO */
         $headersheromovie = (new Movie())->headerhero();
@@ -163,7 +198,6 @@ class WebsiteController
     {
         $serie = (new Episode())->findByID($id);
 
-
         header('Content-Type: application/json;charset=utf-8');
         echo json_encode($serie);
     }
@@ -186,10 +220,6 @@ class WebsiteController
         $categoryformovies = (new Movie)->findMediasByCategory($slug);
         // Take serie by same category 
         $categoryforseries = (new Serie)->findMediasByCategory($slug);
-
-        // if (empty($categoryformovies) && empty($categoryforseries)) {
-        //     return $this->home;
-        // }
 
         $this->render('front-office/category', [
             'categoryformovies' => $categoryformovies,
@@ -271,61 +301,9 @@ class WebsiteController
     #######################
     function contact()
     {
+        (new Contact())->addMessage();
 
-        if (!empty($_POST)) {
-
-            // TEST EMAIL EXIST AND EMAIL IS VALID
-            if (isset($_POST["email"])) {
-                if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-                    return $_POST["error"] = "Please enter valid email";
-                }
-
-                // TEST SUBJECT EXIST
-                if (!isset($_POST["select"])) {
-                    return $_POST["error"] = "Suject dont exist";
-                }
-                // TEST CONTENT EXIST
-                if (!isset($_POST["content"])) {
-                    return $_POST["error"] = "Content dont exist";
-                }
-                // TEST CAPTCHA EXIST AND IS VALID
-                if (isset($_POST["captcha"])) {
-                    if ($_POST["captcha"] == $_SESSION['captcha']) {
-
-                        //CREATE CONTACT MESSAGE
-                        $message = new Contact();
-                        $message->addMessage($_POST["email"], $_POST["select"], $_POST["content"]);
-                        $_POST["success"] = "Your message as been sended";
-                    } else {
-                        $_POST["error"] = "Captcha is invalid";
-                    }
-                } else {
-                    return $_POST["error"] = "Captcha non renseigné";
-                }
-            } else {
-                return $_POST["error"] = "Email dont exist";
-            }
-        }
-
-        //GET ERROR MESSAGE
-        if (isset($_POST["error"])) {
-            $error = $_POST["error"];
-        } else {
-            $error = null;
-        }
-
-
-        //GET SUCCESS MESSAGE
-        if (isset($_POST["success"])) {
-            $success = $_POST["success"];
-        } else {
-            $success = null;
-        }
-
-        $this->render('front-office/contact', [
-            'error' => $error,
-            'success' => $success,
-        ]);
+        $this->render('front-office/contact', []);
     }
 
     #######################
@@ -333,12 +311,8 @@ class WebsiteController
     #######################
     function search()
     {
-        echo ($_POST['search']);
 
-        $array = [];
-        $movies = (new Movie)->findMediasByDescAndLimit(10);
 
-        \var_dump($movies[0]->getName());
 
         $this->render('front-office/search', []);
     }
@@ -349,14 +323,15 @@ class WebsiteController
     #######################
     protected function render(string $viewName, array $args)
     {
-
-
         $loader = new \Twig\Loader\FilesystemLoader('../views/front-office');
         $twig = new \Twig\Environment($loader, [
             'cache' => false,
         ]);
 
         $twig->addGlobal('session', $_SESSION);
+        $twig->addGlobal('post', $_POST);
+        $twig->addGlobal('get', $_GET);
+
         $folder = explode('/', $viewName);
         echo $twig->render($folder[1] . '.html.twig', $args);
     }

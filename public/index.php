@@ -8,11 +8,6 @@ use Src\Functions\WebsiteConfig;
  * @link www.anthonyalves.fr
  */
 
-####
-# SESSION
-####
-session_start();
-
 ###
 # AUTOLOAD
 ###
@@ -38,12 +33,16 @@ WebsiteConfig::websiteLanguage();
 ####
 WebsiteConfig::MediasCategory();
 
-
 ####
 # INIT ROUTE
 ####
 $router = new AltoRouter();
 require_once '../config/routes.php';
+
+####
+# SESSION
+####
+session_start();
 
 # call closure or throw 404 status CALL CLOSURE OR THROW 404 STATUS
 $match = $router->match();
