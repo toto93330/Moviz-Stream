@@ -25,6 +25,17 @@ class Core
      * Check if user is connected
      * @return mixed
      */
+    static function redirectUserIfNotConnected()
+    {
+        if (!isset($_SESSION['user']) && !isset($_SESSION['connect'])) {
+            header('location: /login');
+        }
+    }
+
+    /**
+     * Check if user is connected
+     * @return mixed
+     */
     static function logoutUser()
     {
         if (isset($_SESSION['user']) && isset($_SESSION['connect'])) {

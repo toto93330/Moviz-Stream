@@ -252,34 +252,29 @@
                                  <div class="iq-sub-dropdown iq-user-dropdown">
                                     <div class="iq-card shadow-none m-0">
                                        <div class="iq-card-body p-2 pl-3 pr-3">
-                                          <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
+                                          <a href="/profile" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">
                                                    <h6 class="mb-0 d-block"><i class="ri-file-user-line text-primary"></i> Manage Profile</h6>
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="setting.html" class="iq-sub-card setting-dropdown">
+                                          <a href="/setting" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">
                                                    <h6 class="mb-0 "> <i class="ri-settings-4-line text-primary"></i> Settings</h6>
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="pricing-plan.html" class="iq-sub-card setting-dropdown">
+                                         {% if session.user.roles in "[\"ROLE_ADMIN\"]" %}
+                                          <a href="/admin" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">
-                                                   <h6 class="mb-0"><i class="ri-settings-4-line text-primary"></i> Pricing Plan</h6>
+                                                   <h6 class="mb-0"><i class="ri-settings-4-line text-primary"></i> Administration</h6>
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="pricing-plan.html" class="iq-sub-card setting-dropdown">
-                                             <div class="media align-items-center">
-                                                <div class="media-body ml-3">
-                                                   <h6 class="mb-0"><i class="ri-settings-4-line text-primary"></i> Pricing Plan</h6>
-                                                </div>
-                                             </div>
-                                          </a>
+                                         {% endif %}
                                           <a href="/logout" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">

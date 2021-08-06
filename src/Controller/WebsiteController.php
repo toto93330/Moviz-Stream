@@ -70,10 +70,26 @@ class WebsiteController
 
 
     #######################
+    ## PROFILE
+    #######################
+    function profile()
+    {
+        /* IF USER IS ALLREADY LOGED REDIRECT TO HOME PAGE */
+        Core::redirectUserIfNotConnected();
+
+        /* ADD USER ON POST */
+        (new User())->addUser();
+
+        $this->render('front-office/profile', []);
+    }
+
+
+    #######################
     ## HOME
     #######################
     function home()
     {
+
 
         /* GET HEADER HERO */
         $headersheromovie = (new Movie())->headerhero();

@@ -136,6 +136,12 @@ $router->map('GET', '/logout', function () {
     $controller->logout();
 });
 
+#PROFILE
+$router->map('GET', '/profile', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->profile();
+});
+
 #######################
 ## Front Office AJAX
 #######################
