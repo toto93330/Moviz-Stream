@@ -64,10 +64,10 @@ class User extends Model
             } else {
                 $_SESSION["ERROR"] = "Error : password and email is require";
             }
-        } else {
-            unset($_SESSION['ERROR']);
-            unset($_SESSION['SUCCESS']);
         }
+
+        unset($_SESSION['ERROR']);
+        unset($_SESSION['SUCCESS']);
     }
 
     /**
@@ -147,37 +147,6 @@ class User extends Model
         return $list;
     }
 
-
-    /**
-     * VERIF FORMAT AND IF EMAIL EXIST ON DATABASE
-     * @param string $email
-     * @return void
-     */
-    function verifEmailExistAndFormat($email)
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $_SESSION["ERROR"] = 'Error : Enter Valid email';
-        }
-
-        $emailexist = $this->findEmail($email);
-
-        if (!empty($emailexist)) {
-            return $_SESSION["ERROR"] = 'Error : Your Email is allready exist';
-        }
-    }
-
-
-    /**
-     * VERIF EMAIL FORMAT
-     * @param string $email
-     * @return void
-     */
-    function verifEmailFormat($email)
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $_SESSION["ERROR"] = 'Error : Enter Valid email';
-        }
-    }
 
     /**
      * VERIF PASSWORD IS SAME

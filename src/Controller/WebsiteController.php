@@ -60,14 +60,20 @@ class WebsiteController
 
 
     #######################
+    ## LOGOUT
+    #######################
+    function logout()
+    {
+        /* Logout User */
+        Core::logoutUser();
+    }
+
+
+    #######################
     ## HOME
     #######################
     function home()
     {
-
-        /* TEST USER IS ADMIN */
-        Core::userIsAdmin();
-
 
         /* GET HEADER HERO */
         $headersheromovie = (new Movie())->headerhero();

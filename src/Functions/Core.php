@@ -21,6 +21,21 @@ class Core
         }
     }
 
+    /**
+     * Check if user is connected
+     * @return mixed
+     */
+    static function logoutUser()
+    {
+        if (isset($_SESSION['user']) && isset($_SESSION['connect'])) {
+
+            unset($_SESSION['user']);
+            unset($_SESSION['connect']);
+            header('location: /');
+        } else {
+            header('location: /');
+        }
+    }
 
     /**
      * Check if user is admin

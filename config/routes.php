@@ -130,6 +130,11 @@ $router->map('POST', '/register', function () {
     $controller->register();
 });
 
+#LOGIN
+$router->map('GET', '/logout', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->logout();
+});
 
 #######################
 ## Front Office AJAX
