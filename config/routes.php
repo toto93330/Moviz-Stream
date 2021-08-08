@@ -142,6 +142,18 @@ $router->map('GET', '/profile', function () {
     $controller->profile();
 });
 
+#PROFILE
+$router->map('POST', '/profile', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->profile();
+});
+
+#SETTING
+$router->map('GET', '/setting', function () {
+    $controller = new Src\controller\WebsiteController();
+    $controller->setting();
+});
+
 #######################
 ## Front Office AJAX
 #######################

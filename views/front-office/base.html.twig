@@ -144,39 +144,39 @@
                                             {% endif %}
 
                                             
-                                    <li class="nav-item">
-                                        <a href="/login"><button class="btn btn-hover">Login / Register</button></a>
-                                    </li>
-
-                                            <!-- <li class="nav-item nav-icon">
+                                    {% if  session.user is not empty %}
+                                    
+                                        <li class="nav-item nav-icon">
                                  <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center active" data-toggle="search-toggle">
-                                 <img src="images/user/user.jpg" class="img-fluid avatar-40 rounded-circle" alt="user">
+                                 <img src="{{session.user.avatar}}" class="img-fluid avatar-40 rounded-circle" alt="user">
                                  </a>
                                  <div class="iq-sub-dropdown iq-user-dropdown">
                                     <div class="iq-card shadow-none m-0">
                                        <div class="iq-card-body p-2 pl-3 pr-3">
-                                          <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
+                                          <a href="/profile" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">
                                                    <h6 class="mb-0 d-block"><i class="ri-file-user-line text-primary"></i> Manage Profile</h6>
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="setting.html" class="iq-sub-card setting-dropdown">
+                                          <a href="/setting" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">
                                                    <h6 class="mb-0 "> <i class="ri-settings-4-line text-primary"></i> Settings</h6>
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="pricing-plan.html" class="iq-sub-card setting-dropdown">
+                                         {% if session.user.roles in "[\"ROLE_ADMIN\"]" %}
+                                          <a href="/admin" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">
-                                                   <h6 class="mb-0"><i class="ri-settings-4-line text-primary"></i> Pricing Plan</h6>
+                                                   <h6 class="mb-0"><i class="ri-settings-4-line text-primary"></i> Administration</h6>
                                                 </div>
                                              </div>
                                           </a>
-                                          <a href="login.html" class="iq-sub-card setting-dropdown">
+                                         {% endif %}
+                                          <a href="/logout" class="iq-sub-card setting-dropdown">
                                              <div class="media align-items-center">
                                                 <div class="media-body ml-3">
                                                    <h6 class="mb-0 "><i class="ri-logout-circle-line text-primary"></i> Logout</h6>
@@ -186,7 +186,16 @@
                                        </div>
                                     </div>
                                  </div>
-                              </li> -->
+                              </li>
+
+
+                                    {% else %}
+                                     
+                                    <li class="nav-item">
+                                        <a href="/login"><button class="btn btn-hover">Login / Register</button></a>
+                                    </li>
+                                    
+                                    {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -247,7 +256,7 @@
                                     
                                         <li class="nav-item nav-icon">
                                  <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center active" data-toggle="search-toggle">
-                                 <img src="images/user/user.jpg" class="img-fluid avatar-40 rounded-circle" alt="user">
+                                 <img src="{{session.user.avatar}}" class="img-fluid avatar-40 rounded-circle" alt="user">
                                  </a>
                                  <div class="iq-sub-dropdown iq-user-dropdown">
                                     <div class="iq-card shadow-none m-0">

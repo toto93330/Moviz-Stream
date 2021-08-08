@@ -18,6 +18,7 @@ class EntityUser
     protected $roles;
     protected $password;
     protected $avatar;
+    protected $lang;
     protected $createdat;
     protected $actived;
     protected $banned;
@@ -95,6 +96,17 @@ class EntityUser
     function getAvatar()
     {
         return $this->avatar;
+    }
+
+
+    /**
+     * Return Language
+     *
+     * @return string
+     */
+    function getLang()
+    {
+        return $this->lang;
     }
 
     /**
@@ -207,6 +219,18 @@ class EntityUser
     function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+    }
+
+
+    /**
+     * Set Lang
+     *
+     * @param string
+     * @return void
+     */
+    function setLang($lang)
+    {
+        $this->lang = $lang;
     }
 
     /**

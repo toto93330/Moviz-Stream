@@ -32,8 +32,6 @@ class User extends Model
         if (isset($_POST)) {
             if (isset($_POST['email']) && isset($_POST['password'])) {
 
-
-
                 /* SECURE V POST WITH HTMLSPECIALCHARS */
                 $email = \htmlspecialchars($_POST['email']);
                 $password = \htmlspecialchars($_POST['password']);
@@ -70,6 +68,7 @@ class User extends Model
         unset($_SESSION['SUCCESS']);
     }
 
+
     /**
      * ADD NEW USER
      *
@@ -104,7 +103,7 @@ class User extends Model
                     $password = $this->encryptPassword($password);
 
                     /* DEFINE DEFAULT VALUE */
-                    $avatar = "/images/user/user.jpg";
+                    $avatar = "images/user/1.png";
                     $roles = "[\"ROLE_USER\"]";
                     $banned = 0;
                     $active = 0;
@@ -125,6 +124,79 @@ class User extends Model
         }
     }
 
+    function updateProfile()
+    {
+
+        if (isset($_POST)) {
+
+            if (isset($_POST['actual-password'])) {
+
+                $password = $_SESSION['user']->getPassword();
+                $encryptedpassword = (new User())->encryptPassword($_POST['actual-password']);
+                $this->verifPassword($password, $encryptedpassword);
+
+                if (!isset($_SESSION['ERROR'])) {
+
+                    if (!empty($_POST['firstname'])) {
+                        if (strlen($_POST['firstname']) > 3) {
+                            $firstname = \htmlspecialchars($_POST['firstname']);
+                            $this->updateInfo('firstname', $_SESSION['user']->getId(), $_POST['firstname']);
+                            $_SESSION['user']->setFirstname($firstname);
+                            $_SESSION["SUCCESS"] = 'Success : Your information is updated';
+                        } else {
+                            return $_SESSION["ERROR"] = 'Error : Please enter minimum 3 charactere';
+                        }
+                    }
+
+                    if (!empty($_POST['lastname'])) {
+                        if (strlen($_POST['lastname']) > 3) {
+                            $lastname = \htmlspecialchars($_POST['lastname']);
+                            $this->updateInfo('lastname', $_SESSION['user']->getId(), $_POST['lastname']);
+                            $_SESSION['user']->setLastname($lastname);
+                            $_SESSION["SUCCESS"] = 'Success : Your information is updated';
+                        } else {
+                            return $_SESSION["ERROR"] = 'Error : Please enter minimum 3 charactere';
+                        }
+                    }
+
+                    if (!empty($_POST['lang'])) {
+
+                        $lang = \htmlspecialchars($_POST['lang']);
+                        $this->updateInfo('lang', $_SESSION['user']->getId(), $lang);
+                        $_SESSION['user']->setLang($lang);
+                        $_SESSION["SUCCESS"] = 'Success : Your information is updated';
+                    }
+
+                    if (!empty($_POST['new-password'])) {
+
+                        if ($_POST['new-password'] == $_POST['retry-new-password']) {
+
+                            $password = (new User())->encryptPassword($_POST['new-password']);
+                            $this->updateInfo('password', $_SESSION['user']->getId(), $password);
+                            $_SESSION['user']->setPassword($password);
+
+                            $_SESSION["SUCCESS"] = 'Success : Your information is updated';
+                        } else {
+                            return $_SESSION["ERROR"] = 'Error : New password is not same';
+                        }
+                    }
+
+                    if (!empty($_POST['change-avatar'])) {
+                        if ($_POST['change-avatar'] == ("images/user/1.png" || "images/user/2.png" || "images/user/3.png" || "images/user/4.png" || "images/user/5.png" || "images/user/6.png" || "images/user/7.png" || "images/user/8.png" || "images/user/9.png")) {
+                            $this->updateInfo('avatar', $_SESSION['user']->getId(), $_POST['change-avatar']);
+                            $_SESSION['user']->setavatar($_POST['change-avatar']);
+                            $_SESSION["SUCCESS"] = 'Success : Your information is updated';
+                        } else {
+                            return $_SESSION["ERROR"] = 'Error : Personal image not accepted ';
+                        }
+                    }
+                }
+            } else {
+                unset($_SESSION["ERROR"]);
+                unset($_SESSION["SUCCESS"]);
+            }
+        }
+    }
 
     /**
      * FIND EMAIL

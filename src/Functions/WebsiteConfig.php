@@ -94,8 +94,20 @@ class WebsiteConfig
      */
     static function websiteLanguage()
     {
-        $paramsArray = parse_ini_file("../config/config.inc.ini", true);
+
         // Take Language
-        include_once '../config/langs/' . $paramsArray['language']['language'] . '.php';
+        $paramsArray = parse_ini_file("../config/config.inc.ini", true);
+
+        if (isset($_SESSION['lang'])) {
+            $filename = '../config/langs/' . $_SESSION['lang'] . '.php';
+
+            if (file_exists($filename)) {
+                include_once '../config/langs/' . $_SESSION['lang'] . '.php';
+            } else {
+                include_once '../config/langs/' . $paramsArray['language']['language'] . '.php';
+            }
+        } else {
+            include_once '../config/langs/' . $paramsArray['language']['language'] . '.php';
+        }
     }
 }

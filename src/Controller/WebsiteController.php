@@ -74,15 +74,24 @@ class WebsiteController
     #######################
     function profile()
     {
-        /* IF USER IS ALLREADY LOGED REDIRECT TO HOME PAGE */
+        /* VERIF USER IS CONNECTED */
         Core::redirectUserIfNotConnected();
 
-        /* ADD USER ON POST */
-        (new User())->addUser();
+        (new User())->updateProfile();
 
         $this->render('front-office/profile', []);
     }
 
+    #######################
+    ## SETTING
+    #######################
+    function setting()
+    {
+        /* VERIF USER IS CONNECTED */
+        Core::redirectUserIfNotConnected();
+
+        $this->render('front-office/setting', []);
+    }
 
     #######################
     ## HOME

@@ -9,52 +9,91 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <div class="upload_profile d-inline-block">
-                                <img src="images/user/user.jpg" class="profile-pic rounded-circle img-fluid" alt="user">
-                                <div class="p-image">
-                                    <i class="ri-pencil-line upload-button"></i>
-                                    <input class="file-upload" type="file" accept="image/*">
-                                </div>
+                                <img src="{{session.user.avatar}}" class="profile-pic rounded-circle img-fluid" alt="user">
                                 </div>
                             </div>
                             <div class="col-lg-10 device-margin">
                                 <div class="profile-from">
                                     <h4 class="mb-3">Manage Profile</h4>
-                                    <form class="mt-4" action="https://iqonic.design/themes/streamitnew/frontend/html/index.html">
+                                    <form class="mt-4" action="/profile" method="POST">
                                         <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control mb-0" id="exampleInputl2"
-                                                placeholder="Enter Your Name" autocomplete="off" required>
+                                            <label>Actual Password <span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control mb-0" name="actual-password" id="exampleInputl2"
+                                                placeholder="Enter Your Actual password" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Date of Birth</label>
-                                            <input type="text" class="form-control date-input basicFlatpickr mb-0" placeholder="Select Date" id="exampleInputPassword2"
-                                            required>
+                                            <label>Firstname</label>
+                                            <input type="text" class="form-control mb-0" name="firstname" id="exampleInputl2"
+                                                placeholder="Enter Your firstname" autocomplete="off">
                                         </div>
-                                        <div class="form-group d-flex flex-md-row flex-column">
-                                            <div class="iq-custom-select d-inline-block manage-gen">
-                                                <select name="cars" class="form-control pro-dropdown">
-                                                    <option value="female">Female</option>
-                                                    <option value="male">Male</option>
+                                        <div class="form-group">
+                                            <label>Lastname</label>
+                                            <input type="text" class="form-control mb-0" name="lastname" id="exampleInputl2"
+                                                placeholder="Enter Your lastname" autocomplete="off">
+                                        </div>
+                                        <h4 class="mb-3 mt-3">Language</h4>
+                                        <div class="form-group d-flex flex-md-row flex-column justify-content-center">
+                                            <div class="iq-custom-select d-inline-block manage-dd">
+                                                <select name="lang" class="form-control pro-dropdown">
+                                                    <option>Choisir votre langue</option>
+                                                    <option value="fr">Français</option>
+                                                    <option value="en">English</option>
                                                 </select>
                                             </div>
-                                            <div class="iq-custom-select d-inline-block lang-dropdown manage-dd">
-                                                <select name="cars" class="form-control pro-dropdown" id="lang"
-                                                    multiple="multiple">
-                                                    <option value="english">English</option>
-                                                    <option value="hindi">Hindi</option>
-                                                    <option value="gujarati">Gujarati</option>
-                                                    <option value="bengali">Bengali</option>
-                                                    <option value="marathi">Marathi</option>
-                                                    <option value="tamil">Tamil</option>
-                                                    <option value="kannada">Kannada</option>
-                                                </select>
-                                            </div>
+                                        </div>
+                                        <h4 class="mb-3 mt-3">Change Password</h4>
+                                        <div class="form-group">
+                                            <label>New Password</label>
+                                            <input type="text" class="form-control mb-0" name="new-password"
+                                                placeholder="New Password" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Retry New Password</label>
+                                            <input type="text" class="form-control mb-0" name="retry-new-password"
+                                                placeholder="Retry New Password" autocomplete="off">
+                                        </div>
+                                        <h4 class="mb-3 mt-3">Change Avatar</h4>
+                                        <div class="form-group">
+                                            <!-- image 1  -->
+                                            <input type="radio" name="change-avatar" value="images/user/1.png" id="option1" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/1.png" alt="avatar"></label>
+                                            <!-- image 2  -->
+                                            <input type="radio" name="change-avatar" value="images/user/2.png" id="option2" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/2.png" alt="avatar"></label>
+                                            <!-- image 3  -->
+                                            <input type="radio" name="change-avatar" value="images/user/3.png" id="option3" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/3.png" alt="avatar"></label>
+                                            <!-- image 4  -->
+                                            <input type="radio" name="change-avatar" value="images/user/4.png" id="option4" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/4.png" alt="avatar"></label>
+                                            <!-- image 5 -->
+                                            <input type="radio" name="change-avatar" value="images/user/5.png" id="option5" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/5.png" alt="avatar"></label>
+                                            <!-- image 6  -->
+                                            <input type="radio" name="change-avatar" value="images/user/6.png" id="option6" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/6.png" alt="avatar"></label>
+                                            <!-- image 7  -->
+                                            <input type="radio" name="change-avatar" value="images/user/7.png" id="option7" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/7.png" alt="avatar"></label>
+                                            <!-- image 8 -->
+                                            <input type="radio" name="change-avatar" value="images/user/8.png" id="option8" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/8.png" alt="avatar"></label>
+                                            <!-- image 9  -->
+                                            <input type="radio" name="change-avatar" value="images/user/9.png" id="option9" autocomplete="off">
+                                            <label for="option2"><img class="w-20" src="images/user/9.png" alt="avatar"></label>
                                         </div>
                                         <div class="d-flex">
-                                            <a href="#" class="btn btn-hover">Save</a>
-                                            <a href="#" class="btn btn-link">Cancel</a>
+                                            <input type="submit" class="btn btn-hover" value="Save">
+                                            <a href="/profile" class="btn btn-link">Cancel</a>
                                         </div>
                                     </form>
+                                     {% if session.ERROR is not null %}
+                                    <p class="text-danger text-center pt-2">{{session.ERROR}}</p>
+                                    {% endif %}
+
+                                    {% if session.SUCCESS is not null %}
+                                    <p class="text-success text-center pt-2">{{session.SUCCESS}}</p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

@@ -176,8 +176,6 @@ abstract class Model
         return $list;
     }
 
-
-
     /**
      * Find All video for header hero
      *
@@ -220,6 +218,22 @@ abstract class Model
     }
 
     /**
+     * Update value in database needed 3 value $column $id, $item for exemple :
+     * 
+     * -  $this->UpdateInfo(namecolumn, objectid, newvalue); 
+     *       
+     * @param string $column
+     * @param int $id
+     * @param mixed $item
+     */
+    function updateInfo($column, $id, $item)
+    {
+        $item = htmlspecialchars($item);
+        $model = $this->dbConnect()->prepare("UPDATE $this->table SET $column = '$item' WHERE id = $id");
+        $model->execute();
+    }
+
+    /**
      * Find name by id
      *
      * @param [type] $id
@@ -253,7 +267,6 @@ abstract class Model
      */
     function delect($id)
     {
-
         $query = $this->dbConnect()->prepare("DELETE FROM $this->table WHERE `id` = $id");
         $query->execute();
     }
@@ -266,26 +279,8 @@ abstract class Model
      */
     function findBestSeller()
     {
-
         $query = $this->dbConnect()->prepare("SELECT * FROM likes ORDER BY DESC 0,6");
         $query->execute();
-    }
-
-    /**
-     * Update value in database needed 3 value $column $id, $item for exemple :
-     * 
-     * -  $this->UpdateInfo(namecolumn, objectid, newvalue); 
-     *       
-     * @param string $column
-     * @param int $id
-     * @param mixed $item
-     */
-    function updateInfo($column, $id, $item)
-    {
-
-        $item = htmlspecialchars($item);
-        $model = $this->dbConnect()->prepare("UPDATE $this->table SET $column = ? WHERE id = ?");
-        $model->execute(array($item, $id));
     }
 
     /**
