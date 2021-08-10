@@ -156,6 +156,30 @@ abstract class Model
 
 
     /**
+     * SEARCH MEDIAS
+     * @param string $value.
+     */
+    function searchMedias()
+    {
+        if ($_POST['search']) {
+            $request = \htmlspecialchars($_POST['search']);
+            $list = [];
+            $query = $this->dbConnect()->prepare("SELECT * FROM $this->table WHERE `content` LIKE '%$request%' OR `name` LIKE '%$request%' OR `id` LIKE '%$request%' OR `yearofcreated` LIKE '%$request%' LIMIT 0,10");
+            $query->execute();
+            $items = $query->fetchAll();
+
+            foreach ($items as $articleRaw) {
+                $list[] = $this->getInstance($articleRaw, $this->entity);
+            }
+
+            return $list;
+        } else {
+            header('location: /');
+        }
+    }
+
+
+    /**
      * Return video for news.
      * 
      * @return mixed
@@ -335,7 +359,6 @@ abstract class Model
             return $_SESSION["ERROR"] = 'Error : invalid captcha';
         }
     }
-
 
     /**
      * VERIF FORMAT AND IF EMAIL EXIST ON DATABASE

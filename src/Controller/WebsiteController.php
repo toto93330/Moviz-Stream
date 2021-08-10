@@ -343,9 +343,13 @@ class WebsiteController
     function search()
     {
 
+        $searchmovie = (new Movie())->searchMedias();
+        $searchserie = (new Serie())->searchMedias();
 
-
-        $this->render('front-office/search', []);
+        $this->render('front-office/search', [
+            'searchmovies' => $searchmovie,
+            'searchseries' => $searchserie,
+        ]);
     }
 
 

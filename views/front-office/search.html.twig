@@ -3,49 +3,88 @@
       {% block content %}
 <!-- Slider End -->
 <!-- MainContent -->
-<div class="main-content">
-    <section id="iq-favorites">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12 overflow-hidden">
-                    <div class="iq-main-header d-flex align-items-center justify-content-between">
-                        <h4 class="main-title pt-5">Your Search</h4>
-                    </div>
-
-                    <div class="d-flex justify-content-evenly flex-wrap" id="load-data">
-
-                        <div class="b-block ml-3 mr-3 mb-5 video-items" data-slick-index="0" aria-hidden="false" style="width: 432px;" tabindex="0" style="">
-                            <a href="movie-details.html" tabindex="0">
-                                <div class="block-images position-relative">
-                                    <div class="img-box">
-                                        <img src="../public/images/upcoming/01.jpg" class="img-fluid" alt="">
-                                    </div>
-                                    <div class="block-description">
-                                        <h6>The Last Breath</h6>
-                                        <div class="movie-time d-flex align-items-center my-2">
-                                            <div class="badge badge-secondary p-1 mr-2">5+</div>
-                                            <span class="text-white">2h 30m</span>
-                                        </div>
-                                        <div class="hover-buttons">
-                                            <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
-                                                Play Now
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="block-social-info">
-                                        <ul class="list-inline p-0 m-0 music-play-lists">
-                                            <li><span><i class="ri-volume-mute-fill"></i></span></li>
-                                            <li><span><i class="ri-heart-fill"></i></span></li>
-                                            <li><span><i class="ri-add-line"></i></span></li>
-                                        </ul>
-                                    </div>
+<div class="main-content pt-5">
+    <section id="iq-search" class="pt-5">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-sm-12 overflow-hidden">
+                          <div class="iq-main-header d-flex align-items-center justify-content-between">
+                              <h4 class="main-title">Search</h4>
+                          </div>
+                          <div class="favorites-contens">
+                              <ul class="favorites-slider list-inline  row p-0 mb-0">
+                                {% if (searchmovies is empty) and (searchseries is empty) %}
+                                <div class="d-flex align-items-center">
+                                    <h5 class="text-danger">No result with your search</h5>
                                 </div>
-                            </a>
-                        </div>
+                                {% endif %}
+                                {% for searchmovie in searchmovies %}
+                                  <li class="slide-item">
+                                      <a href="/movie/{{searchmovie.slug}}">
+                                          <div class="block-images position-relative">
+                                              <div class="img-box">
+                                                  <img src="{{searchmovie.image}}" class="img-fluid" alt="">
+                                              </div>
+                                              <div class="block-description">
+                                                  <h6>{{searchmovie.name}}</h6>
+                                                  <div class="movie-time d-flex align-items-center my-2">
+                                                      <div class="badge badge-secondary p-1 mr-2">{{searchmovie.ageadapt}}+</div>
+                                                      <span class="text-white">{{searchmovie.time}}</span>
+                                                  </div>
+                                                  <div class="hover-buttons">
+                                                      <span class="btn btn-hover">
+                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                          {{ constant('_PLAYNOW') }}
+                                                      </span>
+                                                  </div>
+                                              </div>
+                                              <div class="block-social-info">
+                                                  <ul class="list-inline p-0 m-0 music-play-lists">
+                                                      <li><span><i class="ri-heart-fill"></i></span></li>
+                                                      <li><span><i class="ri-add-line"></i></span></li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </a>
+                                  </li>
+                                {% endfor %}
 
-                    </div>
-                </div>
-            </div>
-    </section>
+
+                                {% for searchserie in searchseries %}
+                                  <li class="slide-item">
+                                      <a href="/serie/{{searchserie.id}}/1/{{searchserie.slug}}">
+                                          <div class="block-images position-relative">
+                                              <div class="img-box">
+                                                  <img src="{{searchserie.image}}" class="img-fluid" alt="">
+                                              </div>
+                                              <div class="block-description">
+                                                  <h6>{{searchserie.name}}</h6>
+                                                  <div class="movie-time d-flex align-items-center my-2">
+                                                      <span class="text-white">Saison 1</span>
+                                                  </div>
+                                                  <div class="hover-buttons">
+                                                      <span class="btn btn-hover">
+                                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                                          {{ constant('_PLAYNOW') }}
+                                                      </span>
+                                                  </div>
+                                              </div>
+                                              <div class="block-social-info">
+                                                  <ul class="list-inline p-0 m-0 music-play-lists">
+                                                      <li><span><i class="ri-heart-fill"></i></span></li>
+                                                      <li><span><i class="ri-add-line"></i></span></li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </a>
+                                  </li> 
+                                {% endfor %}
+
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
 </div>
 {% endblock %}
