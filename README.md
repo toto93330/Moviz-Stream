@@ -1,3 +1,4 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/00b6954df1444971861ef084b184cdb6)](https://www.codacy.com/gh/toto93330/Moviz-Stream/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=toto93330/Moviz-Stream&amp;utm_campaign=Badge_Grade)
 # Movie-Stream V.1
  
 ![enter image description here](https://icons.iconarchive.com/icons/osiris/world-flags/16/00-cctld-ac-icon.png)  **ENGLISH** ![enter image description here](https://icons.iconarchive.com/icons/osiris/world-flags/16/00-cctld-ac-icon.png)
