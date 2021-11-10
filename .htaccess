@@ -1,7 +1,11 @@
 RewriteEngine On
-RewriteBase /
 
+# On Pointe vers le dossier public
 RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
 RewriteRule ^ %1 [L,NE,R=302]
-
 RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+
+# on redirige si le protocole n'est pas HTTPS
+RewriteCond %{HTTP_HOST} ^www.letsplaymatsu.fr(.*)$ [NC]
+RewriteRule (.*) https://letsplaymatsu.fr/$1 [R=301,L]
+
